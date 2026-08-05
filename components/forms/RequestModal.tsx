@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { CalendarDays, Car, ConciergeBell, Send, Wrench, X } from "lucide-react";
 import {
   createConciergeRequest,
@@ -10,7 +10,7 @@ import {
   createParkingReservation,
 } from "@/lib/api/submissions";
 import { formOptions } from "@/lib/lumina-data";
-import { SuccessBanner } from "../ui/SuccessBanner";
+import { SubmissionSuccess } from "./SubmissionSuccess";
 
 export type RequestKind = "maintenance" | "concierge" | "parking" | "contact";
 
@@ -40,13 +40,6 @@ const parkingBays = Array.from({ length: 36 }, (_, index) => {
 type SubmissionStatus = "idle" | "validating" | "submitting" | "success" | "error";
 type ReferencePrefix = "M" | "C" | "P" | "G";
 
-const successCopy: Record<RequestKind, string> = {
-  maintenance: "Maintenance request submitted successfully.",
-  concierge: "Concierge request submitted successfully.",
-  parking: "Visitor parking request submitted successfully.",
-  contact: "Your message was sent successfully.",
-};
-
 function createReference(prefix: ReferencePrefix, apiId: number) {
   return `LUM-${prefix}-${String(apiId).padStart(4, "0")}`;
 }
@@ -73,10 +66,10 @@ export function RequestModal({ open, kind, onClose }: RequestModalProps) {
   const [error, setError] = useState("");
   const formRef = useRef<HTMLFormElement | null>(null);
   const errorRef = useRef<HTMLParagraphElement | null>(null);
-  const successRef = useRef<HTMLDivElement | null>(null);
   const selected = meta[kind];
   const Icon = selected.icon;
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
+  const reduceMotion = useReducedMotion();
   const isSubmitting = submissionStatus === "validating" || submissionStatus === "submitting";
 
   function resetFormFields() {
@@ -97,6 +90,11 @@ export function RequestModal({ open, kind, onClose }: RequestModalProps) {
     resetFormFields();
     resetSubmissionState();
     onClose();
+  }
+
+  function handleSubmitAnother() {
+    resetFormFields();
+    resetSubmissionState();
   }
 
   useEffect(() => {
@@ -126,7 +124,7 @@ export function RequestModal({ open, kind, onClose }: RequestModalProps) {
     }
 
     if (submissionStatus === "success") {
-      successRef.current?.focus();
+      window.setTimeout(() => document.getElementById("submission-success-title")?.focus(), 0);
     }
   }, [submissionStatus]);
 
@@ -255,91 +253,113 @@ export function RequestModal({ open, kind, onClose }: RequestModalProps) {
               </button>
             </div>
 
-            <form ref={formRef} className="mt-7 grid min-w-0 gap-4 md:grid-cols-2" onSubmit={handleSubmit} noValidate aria-describedby={error ? "request-form-error" : requestId ? "request-form-success" : undefined}>
-              <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
-                <span>Resident name <RequiredMark /></span>
-                <input name="name" className="field" placeholder="Full name" required />
-              </label>
-              <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
-                <span>Villa <RequiredMark /></span>
-                <select name="villa" className="field" required defaultValue="">
-                  <option value="" disabled>
-                    Select villa
-                  </option>
-                  {villas.map((villa) => (
-                    <option key={villa}>{villa}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
-                <span>{kind === "parking" ? "Duration" : "Category"} <RequiredMark /></span>
-                <select name="category" className="field" required defaultValue="">
-                  <option value="" disabled>
-                    {kind === "parking" ? "Select duration" : "Select one"}
-                  </option>
-                  {selected.options.map((option) => (
-                    <option key={option}>{option}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
-                <span>{kind === "parking" ? "Arrival date" : "Preferred date"} {kind === "parking" ? <RequiredMark /> : null}</span>
-                <span className="relative">
-                  <CalendarDays className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7A92A3]" aria-hidden />
-                  <input name="date" type="date" min={today} className="field pr-11" required={kind === "parking"} />
-                </span>
-              </label>
-              {kind === "parking" ? (
-                <>
-                  <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
-                    <span>Visitor / driver name <RequiredMark /></span>
-                    <input name="visitorName" className="field" placeholder="Name of the person parking" required />
-                  </label>
-                  <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
-                    <span>Parking bay <RequiredMark /></span>
-                    <select name="parkingBay" className="field" required defaultValue="">
-                      <option value="" disabled>
-                        Select available bay
-                      </option>
-                      {parkingBays.map((bay) => (
-                        <option key={bay.label} value={bay.label} disabled={bay.reserved}>
-                          {bay.label}
-                          {bay.reserved ? " - reserved" : ""}
+            <AnimatePresence mode="wait">
+              {submissionStatus === "success" && requestId ? (
+                <motion.div
+                  key="success"
+                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.98 }}
+                  animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+                  transition={{ duration: reduceMotion ? 0.2 : 0.4, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <SubmissionSuccess
+                    kind={kind}
+                    reference={requestId}
+                    apiResponseId={apiResponseId}
+                    onSubmitAnother={handleSubmitAnother}
+                    onClose={closeModal}
+                  />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.99 }}
+                  transition={{ duration: reduceMotion ? 0.18 : 0.25, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <form ref={formRef} className="mt-7 grid min-w-0 gap-4 md:grid-cols-2" onSubmit={handleSubmit} noValidate aria-describedby={error ? "request-form-error" : undefined}>
+                    <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
+                      <span>Resident name <RequiredMark /></span>
+                      <input name="name" className="field" placeholder="Full name" required />
+                    </label>
+                    <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
+                      <span>Villa <RequiredMark /></span>
+                      <select name="villa" className="field" required defaultValue="">
+                        <option value="" disabled>
+                          Select villa
                         </option>
-                      ))}
-                    </select>
-                  </label>
-                </>
-              ) : null}
-              <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50] md:col-span-2">
-                <span>{kind === "parking" ? "Notes" : "Details"} {kind !== "parking" ? <RequiredMark /> : null}</span>
-                <textarea
-                  name="details"
-                  className="field min-h-28 resize-none py-3"
-                  placeholder={kind === "parking" ? "Vehicle plate, arrival time, or special instructions." : "Describe what you need."}
-                  required={kind !== "parking"}
-                />
-              </label>
-              {error ? (
-                <p id="request-form-error" ref={errorRef} tabIndex={-1} role="alert" className="break-words rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700 md:col-span-2">
-                  {error}
-                </p>
-              ) : null}
-              {requestId ? (
-                <div id="request-form-success" ref={successRef} tabIndex={-1} className="min-w-0 md:col-span-2">
-                  <SuccessBanner message={`${successCopy[kind]} Reference ${requestId}.`} />
-                  {apiResponseId ? <p className="mt-2 break-words text-xs leading-5 text-[#6E6E6E]">Demo response id: {apiResponseId}.</p> : null}
-                </div>
-              ) : null}
-              <div className="flex flex-col-reverse gap-3 pt-2 md:col-span-2 md:flex-row md:justify-end">
-                <button type="button" onClick={closeModal} disabled={isSubmitting} className="btn-secondary w-full disabled:cursor-not-allowed disabled:opacity-60 md:w-auto">
-                  Cancel
-                </button>
-                <button type="submit" disabled={isSubmitting} aria-busy={isSubmitting} className="btn-primary w-full disabled:cursor-wait disabled:opacity-70 md:w-auto">
-                  {isSubmitting ? "Submitting..." : "Submit Request"}
-                </button>
-              </div>
-            </form>
+                        {villas.map((villa) => (
+                          <option key={villa}>{villa}</option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
+                      <span>{kind === "parking" ? "Duration" : "Category"} <RequiredMark /></span>
+                      <select name="category" className="field" required defaultValue="">
+                        <option value="" disabled>
+                          {kind === "parking" ? "Select duration" : "Select one"}
+                        </option>
+                        {selected.options.map((option) => (
+                          <option key={option}>{option}</option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
+                      <span>{kind === "parking" ? "Arrival date" : "Preferred date"} {kind === "parking" ? <RequiredMark /> : null}</span>
+                      <span className="relative">
+                        <CalendarDays className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7A92A3]" aria-hidden />
+                        <input name="date" type="date" min={today} className="field pr-11" required={kind === "parking"} />
+                      </span>
+                    </label>
+                    {kind === "parking" ? (
+                      <>
+                        <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
+                          <span>Visitor / driver name <RequiredMark /></span>
+                          <input name="visitorName" className="field" placeholder="Name of the person parking" required />
+                        </label>
+                        <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50]">
+                          <span>Parking bay <RequiredMark /></span>
+                          <select name="parkingBay" className="field" required defaultValue="">
+                            <option value="" disabled>
+                              Select available bay
+                            </option>
+                            {parkingBays.map((bay) => (
+                              <option key={bay.label} value={bay.label} disabled={bay.reserved}>
+                                {bay.label}
+                                {bay.reserved ? " - reserved" : ""}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                      </>
+                    ) : null}
+                    <label className="grid min-w-0 gap-2 text-sm font-medium text-[#2C3E50] md:col-span-2">
+                      <span>{kind === "parking" ? "Notes" : "Details"} {kind !== "parking" ? <RequiredMark /> : null}</span>
+                      <textarea
+                        name="details"
+                        className="field min-h-28 resize-none py-3"
+                        placeholder={kind === "parking" ? "Vehicle plate, arrival time, or special instructions." : "Describe what you need."}
+                        required={kind !== "parking"}
+                      />
+                    </label>
+                    {error ? (
+                      <p id="request-form-error" ref={errorRef} tabIndex={-1} role="alert" className="break-words rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700 md:col-span-2">
+                        {error}
+                      </p>
+                    ) : null}
+                    <div className="flex flex-col-reverse gap-3 pt-2 md:col-span-2 md:flex-row md:justify-end">
+                      <button type="button" onClick={closeModal} disabled={isSubmitting} className="btn-secondary w-full disabled:cursor-not-allowed disabled:opacity-60 md:w-auto">
+                        Cancel
+                      </button>
+                      <button type="submit" disabled={isSubmitting} aria-busy={isSubmitting} className="btn-primary w-full disabled:cursor-wait disabled:opacity-70 md:w-auto">
+                        {isSubmitting ? "Submitting..." : "Submit Request"}
+                      </button>
+                    </div>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         </motion.div>
       ) : null}
