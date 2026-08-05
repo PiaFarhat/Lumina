@@ -34,6 +34,8 @@ export type Service = {
 };
 
 export type Announcement = {
+  id?: number;
+  userId?: number;
   title: string;
   category: string;
   date: string;
@@ -41,11 +43,33 @@ export type Announcement = {
 };
 
 export type Resident = {
+  id?: number;
   name: string;
   villa: string;
   occupation: string;
   initials: string;
+  email?: string;
+  phone?: string;
+  username?: string;
 };
+
+export type MaintenanceStatus = "Submitted" | "Scheduled" | "In Progress" | "Completed";
+
+export type MaintenancePriority = "Low" | "Medium" | "High";
+
+export interface MaintenanceRequest {
+  id: number;
+  residentId: number;
+  title: string;
+  category: string;
+  status: MaintenanceStatus;
+  priority: MaintenancePriority;
+  villa: string;
+  residentName?: string;
+  createdAt: string;
+  reference: string;
+  description?: string;
+}
 
 export type GalleryItem = {
   title: string;
@@ -55,6 +79,28 @@ export type GalleryItem = {
   height: string;
   position?: string;
 };
+
+export interface GalleryAlbum {
+  id: number;
+  residentId: number;
+  title: string;
+  category: string;
+  description: string;
+  coverImage: string;
+  photoCount: number;
+  location?: string;
+  height: string;
+  alt: string;
+}
+
+export interface GalleryPhoto {
+  id: number;
+  albumId: number;
+  title: string;
+  image: string;
+  alt: string;
+  category: string;
+}
 
 export const images = {
   villa: "/img/exterior villa.png",
@@ -139,6 +185,61 @@ export const timeline = [
   { status: "Scheduled", title: "AC service inspection", time: "11:30", icon: CalendarDays },
   { status: "In Progress", title: "Guest parking reservation", time: "13:45", icon: Car },
   { status: "Completed", title: "Concierge delivery handoff", time: "15:05", icon: CircleCheck },
+];
+
+export const fallbackMaintenanceRequests: MaintenanceRequest[] = [
+  {
+    id: 1,
+    residentId: 1,
+    title: "Villa 12 garden irrigation",
+    category: "Landscaping",
+    status: "Submitted",
+    priority: "Medium",
+    villa: "Villa 12",
+    residentName: "Maya Haddad",
+    createdAt: "2026-08-02",
+    reference: "LUM-M-0001",
+    description: "Irrigation timing needs review near the north garden edge.",
+  },
+  {
+    id: 2,
+    residentId: 2,
+    title: "AC service inspection",
+    category: "Air Conditioning",
+    status: "Scheduled",
+    priority: "High",
+    villa: "Villa 21",
+    residentName: "Karim Nassar",
+    createdAt: "2026-08-03",
+    reference: "LUM-M-0002",
+    description: "Preventive inspection scheduled before the weekend.",
+  },
+  {
+    id: 3,
+    residentId: 3,
+    title: "Visitor parking gate calibration",
+    category: "Security",
+    status: "In Progress",
+    priority: "Low",
+    villa: "Villa 17",
+    residentName: "Lea Mansour",
+    createdAt: "2026-08-04",
+    reference: "LUM-M-0003",
+    description: "Gate sensor is being checked after intermittent access delays.",
+  },
+  {
+    id: 4,
+    residentId: 4,
+    title: "Clubhouse handoff completed",
+    category: "General Maintenance",
+    status: "Completed",
+    priority: "Low",
+    villa: "Villa 09",
+    residentName: "Omar Khoury",
+    createdAt: "2026-08-05",
+    reference: "LUM-M-0004",
+    description: "Facility handoff and post-event reset are complete.",
+  },
 ];
 
 export const concierge = [

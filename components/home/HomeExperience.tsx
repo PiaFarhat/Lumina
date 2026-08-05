@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { GalleryAlbum, MaintenanceRequest } from "@/lib/lumina-data";
 import { RequestKind, RequestModal } from "../forms/RequestModal";
 import { Footer } from "../layout/Footer";
 import { FloatingHeader, MobileBottomAction } from "../navigation/FloatingHeader";
@@ -16,7 +17,19 @@ import {
   ResidentsGalleryContact,
 } from "../sections/HomeSections";
 
-export function HomeExperience() {
+type HomeExperienceProps = {
+  maintenanceRequests: MaintenanceRequest[];
+  maintenanceSource: "api" | "fallback";
+  galleryAlbums: GalleryAlbum[];
+  gallerySource: "api" | "fallback";
+};
+
+export function HomeExperience({
+  maintenanceRequests,
+  maintenanceSource,
+  galleryAlbums,
+  gallerySource,
+}: HomeExperienceProps) {
   const [request, setRequest] = useState<RequestKind>("maintenance");
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -34,11 +47,11 @@ export function HomeExperience() {
         <CommunityOverview />
         <QuickServices onRequest={openRequest} />
         <AnnouncementsSection />
-        <RequestStatus />
+        <RequestStatus requests={maintenanceRequests} source={maintenanceSource} />
         <ConciergeSection onRequest={openRequest} />
         <ParkingSection onRequest={openRequest} />
         <EventsSection />
-        <ResidentsGalleryContact onRequest={openRequest} />
+        <ResidentsGalleryContact onRequest={openRequest} galleryAlbums={galleryAlbums} gallerySource={gallerySource} />
       </main>
       <Footer />
       <MobileBottomAction onClick={() => openRequest("maintenance")} hidden={modalOpen || drawerOpen} />
