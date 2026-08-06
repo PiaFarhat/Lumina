@@ -27,6 +27,14 @@ export function mapUserToResident(user: JsonPlaceholderUser, index: number): Res
 }
 
 export async function getResidents(signal?: AbortSignal): Promise<Resident[]> {
-  const users = await getJson<JsonPlaceholderUser[]>("/users", signal);
+  const users = await getUsers(signal);
   return users.map(mapUserToResident);
+}
+
+export function getUsers(signal?: AbortSignal): Promise<JsonPlaceholderUser[]> {
+  return getJson<JsonPlaceholderUser[]>("/users", signal);
+}
+
+export function getUserById(id: number, signal?: AbortSignal): Promise<JsonPlaceholderUser> {
+  return getJson<JsonPlaceholderUser>(`/users/${id}`, signal);
 }

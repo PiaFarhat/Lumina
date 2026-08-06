@@ -8,6 +8,7 @@ import "swiper/css";
 import { ArrowRight, ChevronLeft, ChevronRight, Clock, MapPin, ParkingCircle, RefreshCw, Send, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuth } from "@/components/auth/AuthProvider";
 import { getAnnouncements } from "@/lib/api/announcements";
 import { getPhotosByAlbumId } from "@/lib/api/photos";
 import { getResidents } from "@/lib/api/residents";
@@ -435,6 +436,7 @@ export function EventsSection() {
 }
 
 export function ResidentsGalleryContact({ onRequest, galleryAlbums, gallerySource }: ResidentsGalleryContactProps) {
+  const { resident: signedInResident } = useAuth();
   const [activeGallery, setActiveGallery] = useState<GalleryAlbum | null>(null);
   const [galleryPhotosByAlbum, setGalleryPhotosByAlbum] = useState<Record<number, GalleryPhoto[]>>({});
   const [galleryLoadingId, setGalleryLoadingId] = useState<number | null>(null);
@@ -577,7 +579,9 @@ export function ResidentsGalleryContact({ onRequest, galleryAlbums, gallerySourc
                   <p className="mt-6 text-sm font-semibold text-[#8FA89B]">{resident.villa}</p>
                   <h3 className="mt-2 font-heading text-2xl font-semibold text-[#2C3E50]">{resident.name}</h3>
                   <p className="mt-2 text-sm text-[#6E6E6E]">{resident.occupation}</p>
-                  <button className="mt-7 text-sm font-semibold text-[#789285]">View Profile</button>
+                  <Link href={resident.id === signedInResident?.id ? "/profile" : `/residents/${resident.id ?? 1}`} className="mt-7 inline-flex text-sm font-semibold text-[#789285] focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20">
+                    View Profile
+                  </Link>
                 </motion.article>
               ))}
             </div>

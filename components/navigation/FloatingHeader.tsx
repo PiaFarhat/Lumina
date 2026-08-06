@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Transition } from "framer-motion";
+import { useRouter } from "next/navigation";
 import {
   ArrowRight,
   Bell,
@@ -15,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useAuth } from "../auth/AuthProvider";
 import { RequestKind } from "../forms/RequestModal";
 import { LuminaMark } from "../ui/LuminaMark";
 
@@ -57,6 +59,8 @@ export function FloatingHeader({ onRequest, drawerOpen, setDrawerOpen }: Floatin
   const [isScrolled, setIsScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const { resident, signOut } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     function onScroll() {
@@ -80,13 +84,28 @@ export function FloatingHeader({ onRequest, drawerOpen, setDrawerOpen }: Floatin
 
     if (item.target) {
       setActive(item.label);
-      document.getElementById(item.target)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const target = document.getElementById(item.target);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        router.push(`/#${item.target}`);
+      }
     }
   }
 
   function openDrawer() {
     setServicesOpen(false);
     setDrawerOpen(true);
+  }
+
+  function viewProfile() {
+    setDrawerOpen(false);
+    router.push("/profile");
+  }
+
+  function handleSignOut() {
+    setDrawerOpen(false);
+    signOut();
   }
 
   return (
@@ -119,10 +138,11 @@ export function FloatingHeader({ onRequest, drawerOpen, setDrawerOpen }: Floatin
           <HeaderActions
             onRequest={() => onRequest("maintenance")}
             onNotifications={() => navigate({ label: "Announcements", target: "announcements" })}
-            onResident={() => navigate({ label: "Residents", target: "residents" })}
+            onResident={viewProfile}
             onMenu={openDrawer}
             drawerOpen={drawerOpen}
             menuButtonRef={menuButtonRef}
+            resident={resident}
           />
         </div>
       </ScrollAwareHeader>
@@ -133,6 +153,9 @@ export function FloatingHeader({ onRequest, drawerOpen, setDrawerOpen }: Floatin
         onNavigate={navigate}
         active={active}
         triggerRef={menuButtonRef}
+        resident={resident}
+        onProfile={viewProfile}
+        onSignOut={handleSignOut}
       />
     </>
   );
@@ -220,9 +243,10 @@ type HeaderActionsProps = {
   onMenu: () => void;
   drawerOpen: boolean;
   menuButtonRef: React.RefObject<HTMLButtonElement | null>;
+  resident: ReturnType<typeof useAuth>["resident"];
 };
 
-function HeaderActions({ onRequest, onNotifications, onResident, onMenu, drawerOpen, menuButtonRef }: HeaderActionsProps) {
+function HeaderActions({ onRequest, onNotifications, onResident, onMenu, drawerOpen, menuButtonRef, resident }: HeaderActionsProps) {
   return (
     <div className="flex shrink-0 items-center justify-end gap-1.5 sm:gap-2">
       <div className="hidden md:block">
@@ -242,9 +266,9 @@ function HeaderActions({ onRequest, onNotifications, onResident, onMenu, drawerO
         type="button"
         onClick={onResident}
         className="hidden h-10 w-10 place-items-center rounded-full bg-[#C8A97E] text-sm font-semibold text-white transition hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20 sm:grid"
-        aria-label="View resident profile"
+        aria-label={resident ? `View ${resident.name} profile` : "View resident profile"}
       >
-        RN
+        {resident?.initials ?? "RN"}
       </button>
       <MenuTrigger ref={menuButtonRef} open={drawerOpen} onClick={onMenu} />
     </div>
@@ -281,9 +305,12 @@ type NavigationDrawerProps = {
   onNavigate: (item: NavAction) => void;
   active: string;
   triggerRef: React.RefObject<HTMLButtonElement | null>;
+  resident: ReturnType<typeof useAuth>["resident"];
+  onProfile: () => void;
+  onSignOut: () => void;
 };
 
-function NavigationDrawer({ open, onClose, onNavigate, active, triggerRef }: NavigationDrawerProps) {
+function NavigationDrawer({ open, onClose, onNavigate, active, triggerRef, resident, onProfile, onSignOut }: NavigationDrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -397,7 +424,7 @@ function NavigationDrawer({ open, onClose, onNavigate, active, triggerRef }: Nav
               </div>
             </motion.nav>
 
-            <ResidentMenuCard />
+            <ResidentMenuCard resident={resident} onProfile={onProfile} />
 
             <button
               type="button"
@@ -412,7 +439,7 @@ function NavigationDrawer({ open, onClose, onNavigate, active, triggerRef }: Nav
               <UtilityButton icon={Settings} label="Notification preferences" />
               <UtilityButton icon={ShieldAlert} label="Emergency contacts" />
               <UtilityButton icon={CircleHelp} label="Settings" />
-              <UtilityButton icon={LogOut} label="Sign out" muted />
+              <UtilityButton icon={LogOut} label="Sign out" muted onClick={onSignOut} />
             </div>
           </motion.aside>
         </motion.div>
@@ -447,27 +474,28 @@ function DrawerNavButton({
   );
 }
 
-function ResidentMenuCard() {
+function ResidentMenuCard({ resident, onProfile }: { resident: ReturnType<typeof useAuth>["resident"]; onProfile: () => void }) {
   return (
     <div className="mt-10 rounded-[1.75rem] border border-[#D8D4CC] bg-white p-5">
       <div className="flex items-center gap-4">
-        <div className="grid h-14 w-14 place-items-center rounded-full bg-[#C8A97E] font-semibold text-white">RN</div>
+        <div className="grid h-14 w-14 place-items-center rounded-full bg-[#C8A97E] font-semibold text-white">{resident?.initials ?? "RN"}</div>
         <div>
-          <p className="font-heading text-xl font-semibold text-[#2C3E50]">Resident Name</p>
-          <p className="mt-1 text-sm text-[#6E6E6E]">Villa 18</p>
+          <p className="font-heading text-xl font-semibold text-[#2C3E50]">{resident?.name ?? "Resident"}</p>
+          <p className="mt-1 text-sm text-[#6E6E6E]">{resident?.villa ?? "Lumina"}</p>
         </div>
       </div>
-      <button type="button" className="mt-5 w-full rounded-full border border-[#D8D4CC] bg-[#F4F1EA] px-4 py-3 text-sm font-semibold text-[#2C3E50] transition hover:border-[#8FA89B] focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20">
+      <button type="button" onClick={onProfile} className="mt-5 w-full rounded-full border border-[#D8D4CC] bg-[#F4F1EA] px-4 py-3 text-sm font-semibold text-[#2C3E50] transition hover:border-[#8FA89B] focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20">
         View profile
       </button>
     </div>
   );
 }
 
-function UtilityButton({ icon: Icon, label, muted = false }: { icon: LucideIcon; label: string; muted?: boolean }) {
+function UtilityButton({ icon: Icon, label, muted = false, onClick }: { icon: LucideIcon; label: string; muted?: boolean; onClick?: () => void }) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className={`flex items-center justify-between rounded-2xl px-4 py-3 text-left text-sm font-semibold transition focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20 ${
         muted ? "text-[#6E6E6E] hover:bg-white/60" : "text-[#2C3E50] hover:bg-white/80"
       }`}

@@ -124,3 +124,7 @@ export async function getCommentsByPostId(postId: number): Promise<LuminaComment
   const comments = await getJson<JsonPlaceholderComment[]>(`/posts/${postId}/comments`);
   return comments.map(mapCommentToLuminaComment);
 }
+
+export function getPostsByUserId(userId: number): Promise<JsonPlaceholderPost[]> {
+  return getJson<JsonPlaceholderPost[]>(`/users/${userId}/posts`);
+}

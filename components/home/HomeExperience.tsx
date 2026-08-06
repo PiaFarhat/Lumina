@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AuthGuard } from "../auth/AuthGuard";
 import type { GalleryAlbum, MaintenanceRequest } from "@/lib/lumina-data";
 import { RequestKind, RequestModal } from "../forms/RequestModal";
 import { Footer } from "../layout/Footer";
@@ -40,22 +41,24 @@ export function HomeExperience({
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#F4F1EA] pb-28 text-[#2C3E50] md:pb-0">
-      <FloatingHeader onRequest={openRequest} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
-      <main>
-        <HeroSection onRequest={openRequest} />
-        <CommunityOverview />
-        <QuickServices onRequest={openRequest} />
-        <AnnouncementsSection />
-        <RequestStatus requests={maintenanceRequests} source={maintenanceSource} />
-        <ConciergeSection onRequest={openRequest} />
-        <ParkingSection onRequest={openRequest} />
-        <EventsSection />
-        <ResidentsGalleryContact onRequest={openRequest} galleryAlbums={galleryAlbums} gallerySource={gallerySource} />
-      </main>
-      <Footer />
-      <MobileBottomAction onClick={() => openRequest("maintenance")} hidden={modalOpen || drawerOpen} />
-      <RequestModal open={modalOpen} kind={request} onClose={() => setModalOpen(false)} />
-    </div>
+    <AuthGuard>
+      <div className="min-h-screen overflow-x-hidden bg-[#F4F1EA] pb-28 text-[#2C3E50] md:pb-0">
+        <FloatingHeader onRequest={openRequest} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
+        <main>
+          <HeroSection onRequest={openRequest} />
+          <CommunityOverview />
+          <QuickServices onRequest={openRequest} />
+          <AnnouncementsSection />
+          <RequestStatus requests={maintenanceRequests} source={maintenanceSource} />
+          <ConciergeSection onRequest={openRequest} />
+          <ParkingSection onRequest={openRequest} />
+          <EventsSection />
+          <ResidentsGalleryContact onRequest={openRequest} galleryAlbums={galleryAlbums} gallerySource={gallerySource} />
+        </main>
+        <Footer />
+        <MobileBottomAction onClick={() => openRequest("maintenance")} hidden={modalOpen || drawerOpen} />
+        <RequestModal open={modalOpen} kind={request} onClose={() => setModalOpen(false)} />
+      </div>
+    </AuthGuard>
   );
 }
