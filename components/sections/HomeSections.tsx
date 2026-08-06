@@ -108,7 +108,9 @@ export function QuickServices({ onRequest }: HomeSectionsProps) {
                 onClick={() => onRequest(service.title === "Maintenance" ? "maintenance" : service.title === "Concierge" ? "concierge" : service.title === "Parking" ? "parking" : "contact")}
                 className="group rounded-[1.75rem] border border-[#D8D4CC] bg-white p-7 text-left shadow-sm transition hover:border-[#8FA89B] hover:shadow-xl hover:shadow-[#2C3E50]/8 focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20 md:rounded-[2rem]"
               >
-                <Icon className="h-7 w-7 text-[#2C3E50] transition group-hover:-translate-y-1 group-hover:text-[#789285]" aria-hidden />
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#F4F1EA] text-[#2C3E50]">
+                  <Icon className="h-7 w-7 origin-center transition duration-200 group-hover:scale-110 group-hover:text-[#789285]" aria-hidden />
+                </span>
                 <h3 className="mt-6 font-heading text-2xl font-semibold text-[#2C3E50] md:mt-10">{service.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-[#6E6E6E] md:mt-4 md:min-h-24">{service.description}</p>
                 <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#789285]">
@@ -640,11 +642,20 @@ export function ResidentsGalleryContact({ onRequest, galleryAlbums, gallerySourc
             <div className="grid gap-4 sm:grid-cols-2">
               {contact.map((item) => {
                 const Icon = item.icon;
+                const isEmail = item.label === "Email";
+                const isPhone = item.label === "Security" || item.label === "Emergency";
+                const href = isEmail ? `mailto:${item.value}` : isPhone ? `tel:${item.value.replace(/\s+/g, "")}` : null;
                 return (
                   <div key={item.label} className="rounded-3xl bg-[#F4F1EA] p-5">
                     <Icon className="h-5 w-5 text-[#8FA89B]" aria-hidden />
                     <p className="mt-8 text-sm font-semibold text-[#2C3E50]">{item.label}</p>
-                    <p className="mt-2 text-sm text-[#6E6E6E]">{item.value}</p>
+                    {href ? (
+                      <a href={href} className="mt-2 inline-flex text-sm text-[#6E6E6E] transition hover:text-[#789285] focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20">
+                        {item.value}
+                      </a>
+                    ) : (
+                      <p className="mt-2 text-sm text-[#6E6E6E]">{item.value}</p>
+                    )}
                   </div>
                 );
               })}

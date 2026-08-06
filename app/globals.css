@@ -29,6 +29,19 @@ textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
+a[href],
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+}
+
 ::selection {
   background: #c8a97e;
   color: #2c3e50;
@@ -55,7 +68,7 @@ textarea {
   transform: translateY(-1px);
 }
 
-.btn-primary:focus {
+.btn-primary:focus-visible {
   outline: none;
   box-shadow: 0 0 0 4px rgb(143 168 155 / 0.24), 0 16px 36px rgb(44 62 80 / 0.14);
 }
@@ -81,7 +94,7 @@ textarea {
   transform: translateY(-1px);
 }
 
-.btn-secondary:focus {
+.btn-secondary:focus-visible {
   outline: none;
   box-shadow: 0 0 0 4px rgb(143 168 155 / 0.2);
 }
@@ -98,10 +111,16 @@ textarea {
   transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
-.field:focus {
+.field:focus-visible {
   border-color: #8fa89b;
   background: white;
   box-shadow: 0 0 0 4px rgb(143 168 155 / 0.18);
+}
+
+a[href]:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -112,5 +131,216 @@ textarea {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+.sign-in-page {
+  overflow-x: hidden;
+}
+
+@media (min-width: 768px) {
+  .sign-in-page {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .sign-in-frame {
+    height: calc(100dvh - 2rem);
+  }
+
+  .sign-in-grid {
+    height: 100%;
+  }
+}
+
+@media (max-width: 1023px) {
+  .sign-in-grid {
+    gap: 0.875rem;
+  }
+
+  .sign-in-title {
+    max-width: 9ch;
+  }
+
+  .sign-in-hero-text {
+    max-width: 34rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .sign-in-page {
+    min-height: 100dvh;
+    padding: 0.75rem;
+    overflow-y: hidden;
+  }
+
+  .sign-in-frame {
+    min-height: calc(100dvh - 1.5rem);
+    border-radius: 1.75rem;
+  }
+
+  .sign-in-grid {
+    min-height: calc(100dvh - 1.5rem);
+    align-content: space-between;
+    gap: 0.75rem;
+    padding: 0.875rem;
+  }
+
+  .sign-in-hero {
+    gap: 0.875rem;
+    justify-content: flex-start;
+  }
+
+  .sign-in-brand {
+    gap: 0.625rem;
+    padding: 0.625rem 0.875rem;
+  }
+
+  .sign-in-brand p:first-child {
+    font-size: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .sign-in-kicker {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+  }
+
+  .sign-in-title {
+    margin-top: 0.5rem;
+    max-width: 8ch;
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+  }
+
+  .sign-in-hero-text {
+    margin-top: 0.5rem;
+    max-width: 30rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .sign-in-panel {
+    align-items: stretch;
+    padding-top: 0;
+  }
+
+  .sign-in-card {
+    max-width: none;
+    padding: 1rem;
+  }
+
+  .sign-in-access-meta {
+    margin-top: 1rem;
+    padding: 0.875rem;
+  }
+
+  .field,
+  .btn-primary,
+  .btn-secondary {
+    min-height: 2.875rem;
+  }
+}
+
+@media (max-width: 767px) and (min-height: 760px) {
+  .sign-in-hero-text {
+    display: none;
+  }
+
+  .sign-in-access-meta {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) and (max-height: 759px) {
+  .sign-in-kicker,
+  .sign-in-hero-copy {
+    display: none;
+  }
+
+  .sign-in-page {
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-height: 900px) {
+  .sign-in-frame {
+    height: calc(100dvh - 1.5rem);
+  }
+
+  .sign-in-grid {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .sign-in-hero {
+    padding-block: 0.25rem;
+  }
+
+  .sign-in-brand {
+    transform: scale(0.94);
+    transform-origin: top left;
+  }
+
+  .sign-in-title {
+    max-width: 9ch;
+    font-size: clamp(2.8rem, 4.6vw, 4.25rem);
+  }
+
+  .sign-in-hero-text {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .sign-in-status {
+    gap: 0.75rem;
+  }
+
+  .sign-in-card {
+    padding: 1.25rem;
+  }
+
+  .sign-in-access-meta {
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 768px) and (max-height: 820px) {
+  .sign-in-hero-text,
+  .sign-in-access-meta {
+    display: none;
+  }
+
+  .sign-in-status {
+    gap: 0.625rem;
+  }
+
+  .sign-in-status > * {
+    padding: 0.75rem;
+  }
+
+  .sign-in-card {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 768px) and (max-height: 760px) {
+  .sign-in-page {
+    overflow-y: auto;
+  }
+
+  .sign-in-frame {
+    height: auto;
+    min-height: calc(100dvh - 1rem);
+  }
+
+  .sign-in-grid {
+    height: auto;
+    min-height: calc(100dvh - 1rem);
+    align-items: stretch;
+  }
+
+  .sign-in-status {
+    display: none;
   }
 }

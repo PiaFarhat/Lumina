@@ -49,8 +49,8 @@ export function ResidentProfileView({
 
           <div className="grid gap-6 p-5 sm:p-8 lg:grid-cols-4">
             <InfoTile icon={Building2} label="Villa" value={resident.villa} />
-            <InfoTile icon={Mail} label="Email" value={user.email} />
-            <InfoTile icon={Phone} label="Phone" value={user.phone} />
+            <InfoTile icon={Mail} label="Email" value={user.email} href={`mailto:${user.email}`} />
+            <InfoTile icon={Phone} label="Phone" value={user.phone} href={`tel:${user.phone.replace(/\s+/g, "")}`} />
             <InfoTile icon={MapPin} label="City" value={user.address.city} />
           </div>
         </section>
@@ -61,7 +61,7 @@ export function ResidentProfileView({
             <div className="mt-6 grid gap-4 text-sm text-[#4D5C66]">
               <DetailRow label="Username" value={user.username} />
               <DetailRow label="Company" value={user.company.name} />
-              <DetailRow label="Website" value={user.website} />
+              <DetailRow label="Website" value={user.website} href={`https://${user.website}`} />
               <DetailRow label="Address" value={`${user.address.suite}, ${user.address.street}, ${user.address.city} ${user.address.zipcode}`} />
             </div>
           </section>
@@ -118,21 +118,33 @@ export function ResidentProfileView({
   );
 }
 
-function InfoTile({ icon: Icon, label, value }: { icon: typeof Building2; label: string; value: string }) {
+function InfoTile({ icon: Icon, label, value, href }: { icon: typeof Building2; label: string; value: string; href?: string }) {
   return (
     <div className="rounded-[1.5rem] border border-[#D8D4CC] bg-[#F4F1EA] p-5">
       <Icon className="h-5 w-5 text-[#789285]" aria-hidden />
       <p className="mt-6 text-xs font-semibold uppercase tracking-[0.16em] text-[#7A92A3]">{label}</p>
-      <p className="mt-2 break-words text-sm font-semibold">{value}</p>
+      {href ? (
+        <a href={href} className="mt-2 inline-flex break-words text-sm font-semibold transition hover:text-[#789285] focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20">
+          {value}
+        </a>
+      ) : (
+        <p className="mt-2 break-words text-sm font-semibold">{value}</p>
+      )}
     </div>
   );
 }
 
-function DetailRow({ label, value }: { label: string; value: string }) {
+function DetailRow({ label, value, href }: { label: string; value: string; href?: string }) {
   return (
     <div className="flex flex-wrap justify-between gap-3 border-b border-[#D8D4CC] pb-3 last:border-b-0">
       <span className="font-semibold text-[#2C3E50]">{label}</span>
-      <span className="break-words text-right text-[#6E6E6E]">{value}</span>
+      {href ? (
+        <a href={href} className="break-words text-right text-[#6E6E6E] transition hover:text-[#789285] focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20">
+          {value}
+        </a>
+      ) : (
+        <span className="break-words text-right text-[#6E6E6E]">{value}</span>
+      )}
     </div>
   );
 }
