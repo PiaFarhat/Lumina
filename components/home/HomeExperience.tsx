@@ -7,6 +7,7 @@ import { RequestKind, RequestModal } from "../forms/RequestModal";
 import { Footer } from "../layout/Footer";
 import { FloatingHeader, MobileBottomAction } from "../navigation/FloatingHeader";
 import { HeroSection } from "./HeroSection";
+import { EditorialShowcase } from "../sections/EditorialShowcase";
 import {
   AnnouncementsSection,
   CommunityOverview,
@@ -47,6 +48,7 @@ export function HomeExperience({
         <main>
           <HeroSection onRequest={openRequest} />
           <CommunityOverview />
+          <EditorialShowcase />
           <QuickServices onRequest={openRequest} />
           <AnnouncementsSection />
           <RequestStatus requests={maintenanceRequests} source={maintenanceSource} />
