@@ -8,6 +8,7 @@ import { Footer } from "../layout/Footer";
 import { FloatingHeader, MobileBottomAction } from "../navigation/FloatingHeader";
 import { HeroSection } from "./HeroSection";
 import { EditorialShowcase } from "../sections/EditorialShowcase";
+import { LuminaStandard } from "../sections/LuminaStandard";
 import {
   AnnouncementsSection,
   CommunityOverview,
@@ -49,6 +50,7 @@ export function HomeExperience({
           <HeroSection onRequest={openRequest} />
           <CommunityOverview />
           <EditorialShowcase />
+          <LuminaStandard />
           <QuickServices onRequest={openRequest} />
           <AnnouncementsSection />
           <RequestStatus requests={maintenanceRequests} source={maintenanceSource} />

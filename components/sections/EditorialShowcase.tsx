@@ -214,7 +214,7 @@ function MobileMarqueeRow({
   const animateX = direction === "left" ? "-50%" : "0%";
 
   return (
-    <div className="-mx-3 overflow-hidden px-3 min-[390px]:-mx-4 min-[390px]:px-4">
+    <div className="-mx-[14px] overflow-hidden px-[14px] min-[390px]:-mx-4 min-[390px]:px-4">
       <motion.div
         initial={{ x: initialX }}
         animate={reduceMotion ? { x: initialX } : { x: animateX }}
@@ -249,17 +249,23 @@ export function EditorialShowcase() {
   const reduceMotion = !!useReducedMotion();
 
   return (
-    <section className="relative bg-[#F8F5EE] px-3 py-12 sm:px-4 sm:py-14 lg:py-24 xl:py-28">
+    <section className="relative bg-[#F8F5EE] px-[14px] py-12 sm:px-4 sm:py-14 lg:py-24 xl:py-28">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+        <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(248,245,238,0.96),rgba(248,245,238,0))] lg:h-32" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(0deg,rgba(248,245,238,0.98),rgba(248,245,238,0))] lg:h-36" />
         <div className="absolute inset-x-[31%] bottom-0 top-[34%] hidden lg:block">
-          <div className="absolute inset-0 rounded-tl-[10rem] rounded-tr-[3rem] bg-[#DCE5E8]/80 [clip-path:polygon(0_72%,12%_58%,28%_47%,46%_38%,66%_24%,84%_12%,100%_4%,100%_100%,0_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,245,238,0),rgba(220,229,232,0.52)_38%,rgba(211,222,227,0.9)_100%)]" />
+          <div className="absolute inset-0 rounded-tl-[10rem] rounded-tr-[3rem] bg-[#DCE5E8]/72 [clip-path:polygon(0_72%,12%_58%,28%_47%,46%_38%,66%_24%,84%_12%,100%_4%,100%_100%,0_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,245,238,0.04)_0%,rgba(236,241,243,0.58)_24%,rgba(223,232,236,0.74)_52%,rgba(248,245,238,0.22)_78%,rgba(248,245,238,0)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_20%,rgba(248,245,238,0.14),transparent_30%),radial-gradient(circle_at_76%_54%,rgba(122,146,163,0.08),transparent_34%),linear-gradient(90deg,rgba(248,245,238,0.14),rgba(248,245,238,0)_16%,rgba(248,245,238,0)_84%,rgba(248,245,238,0.14))]" />
+          <div className="absolute inset-x-0 bottom-[-2%] h-[28%] bg-[linear-gradient(180deg,rgba(220,229,232,0),rgba(248,245,238,0.72)_68%,rgba(248,245,238,0.96)_100%)]" />
         </div>
         <div className="absolute inset-x-[45%] bottom-0 top-[56%] hidden md:block lg:hidden">
-          <div className="absolute inset-0 rounded-tl-[6rem] bg-[#DCE5E8]/38 [clip-path:polygon(0_58%,24%_42%,54%_28%,100%_14%,100%_100%,0_100%)]" />
+          <div className="absolute inset-0 rounded-tl-[6rem] bg-[#DCE5E8]/34 [clip-path:polygon(0_58%,24%_42%,54%_28%,100%_14%,100%_100%,0_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(220,229,232,0.46),rgba(248,245,238,0.08)_66%,rgba(248,245,238,0)_100%)]" />
         </div>
         <div className="absolute inset-x-0 bottom-0 top-[72%] md:hidden">
-          <div className="absolute inset-0 bg-[#AABBC6]/55 [clip-path:polygon(0_34%,28%_22%,52%_18%,74%_12%,100%_0%,100%_100%,0_100%)]" />
+          <div className="absolute inset-0 bg-[#AABBC6]/46 [clip-path:polygon(0_34%,28%_22%,52%_18%,74%_12%,100%_0%,100%_100%,0_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(220,229,232,0.38),rgba(248,245,238,0.12)_70%,rgba(248,245,238,0)_100%)]" />
         </div>
       </div>
 

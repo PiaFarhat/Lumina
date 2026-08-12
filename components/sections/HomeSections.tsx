@@ -159,9 +159,10 @@ export function AnnouncementsSection() {
     () => announcements.filter((item) => `${item.title} ${item.category} ${item.description}`.toLowerCase().includes(query.toLowerCase())),
     [announcements, query],
   );
+  const featuredAnnouncement = filtered[0];
 
   return (
-    <section id="announcements" className="bg-white px-4 py-20">
+    <section id="announcements" className="relative isolate bg-white px-4 py-20">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[1fr_380px] lg:items-end">
           <SectionHeading eyebrow="Announcements" title="Notices that feel considered, not broadcast." />
@@ -169,11 +170,17 @@ export function AnnouncementsSection() {
         </div>
         {error ? <p className="mt-6 rounded-2xl border border-[#D8D4CC] bg-[#F4F1EA] px-4 py-3 text-sm text-[#6E6E6E]">{error}</p> : null}
         {isLoading ? (
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
-            <div className="rounded-[2rem] bg-[#F4F1EA] p-8 lg:col-span-2">
-              <LoadingSkeleton />
-              <div className="mt-24"><LoadingSkeleton /></div>
-              <div className="mt-5"><LoadingSkeleton /></div>
+          <div className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.58fr)_minmax(320px,0.92fr)] lg:items-start">
+            <div className="overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#2C3E50] shadow-sm lg:sticky lg:top-28">
+              <div className="aspect-[16/10] bg-[#F4F1EA] p-8">
+                <LoadingSkeleton />
+              </div>
+              <div className="space-y-5 p-8">
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+              </div>
             </div>
             <div className="grid gap-5">
               <div className="rounded-[2rem] border border-[#D8D4CC] bg-[#F4F1EA] p-6"><LoadingSkeleton /></div>
@@ -181,16 +188,59 @@ export function AnnouncementsSection() {
             </div>
           </div>
         ) : filtered.length ? (
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
-            <Link href={`/announcements/${filtered[0].id ?? 1}`} className="group block rounded-[2rem] focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/25 lg:col-span-2">
-              <motion.article whileHover={{ y: -4 }} className="relative min-h-96 overflow-hidden rounded-[2rem] bg-[#2C3E50] p-8 text-white">
-                <Image src={images.clubhouse} alt="Lumina clubhouse pool terrace prepared for a resident evening event" fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover opacity-62 transition duration-700 group-hover:scale-[1.03]" />
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(44,62,80,0.9),rgba(44,62,80,0.3))]" />
-                <div className="relative">
-                  <span className="rounded-full bg-white/12 px-3 py-1 text-xs font-semibold">{filtered[0].category}</span>
-                  <h3 className="mt-20 max-w-2xl font-heading text-3xl font-semibold sm:mt-28 sm:text-4xl">{filtered[0].title}</h3>
-                  <p className="mt-5 max-w-2xl leading-7 text-white/78">{filtered[0].description}</p>
-                  <p className="mt-8 text-sm text-white/68">{filtered[0].date}</p>
+          <div className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.58fr)_minmax(320px,0.92fr)] lg:items-start">
+            <Link
+              href={`/announcements/${featuredAnnouncement?.id ?? 1}`}
+              className="group relative z-10 block overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#2C3E50] shadow-sm focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/25 lg:sticky lg:top-28"
+            >
+              <motion.article whileHover={{ y: -4 }} className="overflow-hidden rounded-[2rem] text-white">
+                <div className="relative aspect-[16/10] overflow-hidden lg:aspect-[16/7]">
+                  <div className="absolute inset-0">
+                    <Image
+                      src={images.clubhouse}
+                      alt="Lumina clubhouse pool terrace prepared for a resident evening event"
+                      fill
+                      sizes="(min-width: 1024px) 58vw, 100vw"
+                      className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.08),rgba(44,62,80,0.2)_48%,rgba(44,62,80,0.62)_100%)]" />
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,rgba(44,62,80,0),rgba(44,62,80,0.84))]" />
+                  <div className="absolute left-6 top-6 z-10 sm:left-8 sm:top-8">
+                    <span className="rounded-full border border-white/20 bg-[#F4F1EA]/12 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#F4F1EA] backdrop-blur-sm">
+                      {featuredAnnouncement.category}
+                    </span>
+                  </div>
+                </div>
+                <div className="relative grid gap-7 bg-[#2C3E50] px-6 py-6 sm:px-8 sm:py-8 lg:min-h-[22rem] lg:grid-rows-[auto_auto_1fr_auto]">
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[linear-gradient(180deg,rgba(122,146,163,0.16),rgba(44,62,80,0))]" />
+                  <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,rgba(244,241,234,0),rgba(244,241,234,0.28),rgba(244,241,234,0))]" />
+                  <div className="flex flex-wrap items-center gap-3">
+                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[#8FA89B]">
+                      Featured Announcement
+                    </p>
+                    <span className="rounded-full border border-white/12 bg-white/8 px-3 py-1 text-xs font-semibold text-[#F4F1EA]">
+                      {featuredAnnouncement.category}
+                    </span>
+                  </div>
+                  <h3 className="max-w-[13ch] font-heading text-[clamp(1.8rem,2.4vw,2.8rem)] font-semibold leading-[1.08] text-[#F4F1EA]">
+                    {featuredAnnouncement.title}
+                  </h3>
+                  <p className="max-w-[36rem] overflow-hidden text-base leading-7 text-[#D7DEE3] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">
+                    {featuredAnnouncement.description}
+                  </p>
+                  <div className="flex items-end justify-between gap-5 border-t border-white/10 pt-5">
+                    <div className="space-y-4">
+                      <p className="text-sm text-[#C7D1D8]">{featuredAnnouncement.date}</p>
+                      <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#F4F1EA] transition group-hover:text-[#C8A97E] group-focus-visible:text-[#C8A97E]">
+                        Read announcement
+                        <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+                      </span>
+                    </div>
+                    <p className="text-right text-sm font-semibold uppercase tracking-[0.2em] text-[#8FA89B]">
+                      Featured
+                    </p>
+                  </div>
                 </div>
               </motion.article>
             </Link>
