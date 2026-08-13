@@ -1,12 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, CalendarDays, Car, ConciergeBell, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { images } from "@/lib/lumina-data";
 import { RequestKind } from "../forms/RequestModal";
 
 export function HeroSection({ onRequest }: { onRequest: (kind: RequestKind) => void }) {
+  const reduceMotion = !!useReducedMotion();
+  const heroWidgets: Array<{
+    label: string;
+    value: string;
+    icon: typeof Car;
+    className: string;
+  }> = [
+    {
+      label: "Visitor Parking",
+      value: "18 Available",
+      icon: Car,
+      className: "left-2 top-0 sm:left-0",
+    },
+    {
+      label: "Concierge",
+      value: "Available Now",
+      icon: ConciergeBell,
+      className: "right-2 top-28 sm:right-0 sm:top-32",
+    },
+    {
+      label: "Community Event",
+      value: "Friday 7 PM",
+      icon: CalendarDays,
+      className: "right-4 top-[410px] sm:right-6 sm:top-[430px]",
+    },
+  ];
+
   return (
     <section id="home" className="relative overflow-hidden px-4 pb-14 pt-28 sm:pb-20 sm:pt-40 lg:min-h-screen lg:pb-24">
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
@@ -33,9 +60,22 @@ export function HeroSection({ onRequest }: { onRequest: (kind: RequestKind) => v
         </motion.div>
         <div className="relative min-h-[560px] sm:min-h-[610px]">
           <motion.div
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-x-0 top-8 h-[430px] overflow-hidden rounded-[2rem] border border-white/70 bg-white shadow-2xl shadow-[#2C3E50]/12 sm:inset-x-6 sm:h-[460px] sm:rounded-[3rem]"
+            initial={{ opacity: 0, scale: 1.02 }}
+            animate={
+              reduceMotion
+                ? { opacity: 1, scale: 1, y: 0 }
+                : { opacity: 1, scale: 1, y: [0, -2, 0] }
+            }
+            transition={
+              reduceMotion
+                ? { duration: 0.9, ease: "easeOut" }
+                : {
+                  opacity: { duration: 0.9, ease: "easeOut" },
+                  scale: { duration: 0.9, ease: "easeOut" },
+                  y: { duration: 12, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 1.2 },
+                }
+            }
+            className="absolute inset-x-0 top-8 h-[430px] overflow-hidden rounded-[2rem] border border-white/70 bg-white shadow-2xl shadow-[#2C3E50]/12 will-change-transform sm:inset-x-6 sm:h-[460px] sm:rounded-[3rem]"
           >
             <Image
               src={images.villa}
@@ -53,23 +93,34 @@ export function HeroSection({ onRequest }: { onRequest: (kind: RequestKind) => v
               <p className="mt-2 hidden text-sm leading-6 text-[#6E6E6E] sm:block">Architecture, landscape, and service flow in one resident view.</p>
             </div>
           </motion.div>
-          {[
-            { label: "Visitor Parking", value: "18 Available", icon: Car, className: "left-2 top-0 sm:left-0" },
-            { label: "Concierge", value: "Available Now", icon: ConciergeBell, className: "right-2 top-28 sm:right-0 sm:top-32" },
-            { label: "Community Event", value: "Friday 7 PM", icon: CalendarDays, className: "right-4 top-[410px] sm:right-6 sm:top-[430px]" },
-          ].map((widget, index) => {
+          {heroWidgets.map((widget, index) => {
             const Icon = widget.icon;
             return (
               <motion.div
                 key={widget.label}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.25 + index * 0.12 }}
-                className={`absolute ${widget.className} max-w-[210px] rounded-[1.25rem] border border-[#D8D4CC] bg-white p-3 shadow-xl shadow-[#2C3E50]/10 sm:max-w-none sm:rounded-[1.5rem] sm:p-5`}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.25 + index * 0.12, duration: 0.55, ease: "easeOut" }}
+                className={`absolute z-10 ${widget.className} max-w-[210px] rounded-[1.25rem] border border-[#D8D4CC] bg-white p-3 shadow-xl shadow-[#2C3E50]/10 will-change-transform sm:max-w-none sm:rounded-[1.5rem] sm:p-5`}
               >
-                <Icon className="mb-4 h-5 w-5 text-[#8FA89B]" aria-hidden />
-                <p className="text-[0.68rem] uppercase tracking-[0.16em] text-[#7A92A3] sm:text-xs">{widget.label}</p>
-                <p className="mt-2 font-heading text-lg font-semibold text-[#2C3E50] sm:text-xl">{widget.value}</p>
+                <motion.div
+                  animate={reduceMotion ? { y: 0 } : { y: [0, -0.75, 0] }}
+                  transition={
+                    reduceMotion
+                      ? { duration: 0.2 }
+                      : {
+                          duration: 10.5 + index * 0.8,
+                          repeat: Infinity,
+                          repeatType: "mirror",
+                          ease: "easeInOut",
+                          delay: 1 + index * 0.18,
+                        }
+                  }
+                >
+                  <Icon className="mb-4 h-5 w-5 text-[#8FA89B]" aria-hidden />
+                  <p className="text-[0.68rem] uppercase tracking-[0.16em] text-[#7A92A3] sm:text-xs">{widget.label}</p>
+                  <p className="mt-2 font-heading text-lg font-semibold text-[#2C3E50] sm:text-xl">{widget.value}</p>
+                </motion.div>
               </motion.div>
             );
           })}

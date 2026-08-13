@@ -1,0 +1,15 @@
+{
+  "hasTab": true,
+  "methods": [
+    "constructor",
+    "goto",
+    "back",
+    "forward",
+    "reload",
+    "close",
+    "screenshot",
+    "title",
+    "url",
+    "getJsDialog"
+  ]
+}

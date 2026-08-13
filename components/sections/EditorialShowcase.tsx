@@ -160,12 +160,14 @@ function MediaColumn({
   direction,
   duration,
   reduceMotion,
+  cardClassName = "",
   className = "",
 }: {
   cards: ShowcaseCardItem[];
   direction: "up" | "down";
   duration: number;
   reduceMotion: boolean;
+  cardClassName?: string;
   className?: string;
 }) {
   const initialY = direction === "up" ? "0%" : "-50%";
@@ -188,9 +190,13 @@ function MediaColumn({
         className="flex flex-col"
       >
         {[0, 1].map((stackIndex) => (
-          <div key={stackIndex} className="flex flex-col gap-6 pb-6">
+          <div key={stackIndex} className="flex flex-col gap-6 pb-6 xl:gap-7 xl:pb-7">
             {cards.map((card) => (
-              <ShowcaseCard key={`${stackIndex}-${card.title}`} card={card} />
+              <ShowcaseCard
+                key={`${stackIndex}-${card.title}`}
+                card={card}
+                className={cardClassName}
+              />
             ))}
           </div>
         ))}
@@ -253,11 +259,11 @@ export function EditorialShowcase() {
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
         <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(248,245,238,0.96),rgba(248,245,238,0))] lg:h-32" />
         <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(0deg,rgba(248,245,238,0.98),rgba(248,245,238,0))] lg:h-36" />
-        <div className="absolute inset-x-[31%] bottom-0 top-[34%] hidden lg:block">
-          <div className="absolute inset-0 rounded-tl-[10rem] rounded-tr-[3rem] bg-[#DCE5E8]/72 [clip-path:polygon(0_72%,12%_58%,28%_47%,46%_38%,66%_24%,84%_12%,100%_4%,100%_100%,0_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,245,238,0.04)_0%,rgba(236,241,243,0.58)_24%,rgba(223,232,236,0.74)_52%,rgba(248,245,238,0.22)_78%,rgba(248,245,238,0)_100%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_20%,rgba(248,245,238,0.14),transparent_30%),radial-gradient(circle_at_76%_54%,rgba(122,146,163,0.08),transparent_34%),linear-gradient(90deg,rgba(248,245,238,0.14),rgba(248,245,238,0)_16%,rgba(248,245,238,0)_84%,rgba(248,245,238,0.14))]" />
-          <div className="absolute inset-x-0 bottom-[-2%] h-[28%] bg-[linear-gradient(180deg,rgba(220,229,232,0),rgba(248,245,238,0.72)_68%,rgba(248,245,238,0.96)_100%)]" />
+        <div className="absolute inset-x-[10%] bottom-[6%] top-[50%] hidden lg:block">
+          <div className="absolute inset-0 rounded-tl-[12rem] rounded-tr-[4rem] bg-[#B4C2C9]/42 [clip-path:polygon(0_60%,10%_48%,22%_40%,38%_34%,56%_26%,74%_18%,90%_10%,100%_6%,100%_100%,0_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,245,238,0.02)_0%,rgba(220,229,232,0.34)_22%,rgba(180,194,201,0.46)_54%,rgba(143,168,155,0.16)_76%,rgba(248,245,238,0.1)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(248,245,238,0.14),transparent_28%),radial-gradient(circle_at_72%_42%,rgba(122,146,163,0.1),transparent_32%),radial-gradient(circle_at_82%_76%,rgba(143,168,155,0.1),transparent_24%)]" />
+          <div className="absolute inset-x-0 bottom-[-2%] h-[32%] bg-[linear-gradient(180deg,rgba(180,194,201,0),rgba(248,245,238,0.64)_68%,rgba(248,245,238,0.96)_100%)]" />
         </div>
         <div className="absolute inset-x-[45%] bottom-0 top-[56%] hidden md:block lg:hidden">
           <div className="absolute inset-0 rounded-tl-[6rem] bg-[#DCE5E8]/34 [clip-path:polygon(0_58%,24%_42%,54%_28%,100%_14%,100%_100%,0_100%)]" />
@@ -269,14 +275,14 @@ export function EditorialShowcase() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1700px]">
-        <div className="grid gap-12 lg:grid-cols-[0.53fr_0.47fr] lg:items-start lg:gap-14 xl:gap-18">
+      <div className="relative z-10 mx-auto w-full max-w-[min(96vw,1800px)]">
+        <div className="grid gap-10 lg:grid-cols-[0.46fr_0.54fr] lg:items-start lg:gap-10 xl:gap-12 2xl:gap-14">
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
-            className="max-w-[760px]"
+            className="max-w-[820px]"
           >
             <motion.p variants={fadeUp} className="text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-[#8FA89B] min-[390px]:text-[0.7rem] sm:text-xs sm:tracking-[0.26em]">
               Life at Lumina
@@ -313,23 +319,27 @@ export function EditorialShowcase() {
           </motion.div>
 
           <div className="hidden w-full min-w-0 lg:block">
-            <div className="relative h-[clamp(680px,78vw,980px)] w-full overflow-hidden">
-              <div className="grid h-full grid-cols-2 gap-[clamp(20px,2vw,30px)]">
+            <div className="relative h-[clamp(600px,68vh,740px)] w-full overflow-hidden rounded-[2rem]">
+              <div className="grid h-full grid-cols-2 gap-[clamp(18px,1.8vw,28px)]">
                 <MediaColumn
                   cards={columnOneCards}
                   direction="up"
                   duration={20}
                   reduceMotion={reduceMotion}
-                  className="w-full pt-12"
+                  cardClassName="!aspect-auto h-[clamp(240px,30vh,330px)] rounded-[1.6rem] xl:rounded-[1.75rem]"
+                  className="w-full pt-6 xl:pt-8"
                 />
                 <MediaColumn
                   cards={columnTwoCards}
                   direction="down"
                   duration={24}
                   reduceMotion={reduceMotion}
-                  className="w-full pt-28"
+                  cardClassName="!aspect-auto h-[clamp(240px,30vh,330px)] rounded-[1.6rem] xl:rounded-[1.75rem]"
+                  className="w-full pt-20 xl:pt-24"
                 />
               </div>
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-[linear-gradient(180deg,rgba(248,245,238,0.82),rgba(248,245,238,0))] xl:h-12" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-[linear-gradient(0deg,rgba(248,245,238,0.82),rgba(248,245,238,0.06)_62%,rgba(248,245,238,0))] xl:h-14" />
             </div>
           </div>
 

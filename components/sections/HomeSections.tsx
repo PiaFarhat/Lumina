@@ -171,7 +171,7 @@ export function AnnouncementsSection() {
         {error ? <p className="mt-6 rounded-2xl border border-[#D8D4CC] bg-[#F4F1EA] px-4 py-3 text-sm text-[#6E6E6E]">{error}</p> : null}
         {isLoading ? (
           <div className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.58fr)_minmax(320px,0.92fr)] lg:items-start">
-            <div className="overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#2C3E50] shadow-sm lg:sticky lg:top-28">
+            <div className="overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#2C3E50] shadow-sm lg:h-[clamp(620px,72vh,760px)]">
               <div className="aspect-[16/10] bg-[#F4F1EA] p-8">
                 <LoadingSkeleton />
               </div>
@@ -182,19 +182,22 @@ export function AnnouncementsSection() {
                 <LoadingSkeleton />
               </div>
             </div>
-            <div className="grid gap-5">
-              <div className="rounded-[2rem] border border-[#D8D4CC] bg-[#F4F1EA] p-6"><LoadingSkeleton /></div>
-              <div className="rounded-[2rem] border border-[#D8D4CC] bg-[#F4F1EA] p-6"><LoadingSkeleton /></div>
+            <div className="relative lg:h-[clamp(620px,72vh,760px)]">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 hidden h-14 bg-[linear-gradient(0deg,#FFFFFF,rgba(255,255,255,0))] lg:block" />
+              <div className="flex gap-5 lg:h-full lg:flex-col lg:overflow-y-auto lg:px-2 lg:pb-4" style={{ scrollbarWidth: "thin", scrollbarColor: "#A9B4BC transparent" }}>
+                <div className="rounded-[2rem] border border-[#D8D4CC] bg-[#F4F1EA] p-6"><LoadingSkeleton /></div>
+                <div className="rounded-[2rem] border border-[#D8D4CC] bg-[#F4F1EA] p-6"><LoadingSkeleton /></div>
+              </div>
             </div>
           </div>
         ) : filtered.length ? (
           <div className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.58fr)_minmax(320px,0.92fr)] lg:items-start">
             <Link
               href={`/announcements/${featuredAnnouncement?.id ?? 1}`}
-              className="group relative z-10 block overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#2C3E50] shadow-sm focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/25 lg:sticky lg:top-28"
+              className="group relative block overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#2C3E50] shadow-sm focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/25 lg:h-[clamp(620px,72vh,760px)]"
             >
-              <motion.article whileHover={{ y: -4 }} className="overflow-hidden rounded-[2rem] text-white">
-                <div className="relative aspect-[16/10] overflow-hidden lg:aspect-[16/7]">
+              <motion.article whileHover={{ y: -4 }} className="overflow-hidden rounded-[2rem] text-white lg:flex lg:h-full lg:flex-col">
+                <div className="relative aspect-[16/10] overflow-hidden lg:h-[42%] lg:min-h-[248px] lg:shrink-0 lg:aspect-auto">
                   <div className="absolute inset-0">
                     <Image
                       src={images.clubhouse}
@@ -212,7 +215,7 @@ export function AnnouncementsSection() {
                     </span>
                   </div>
                 </div>
-                <div className="relative grid gap-7 bg-[#2C3E50] px-6 py-6 sm:px-8 sm:py-8 lg:min-h-[22rem] lg:grid-rows-[auto_auto_1fr_auto]">
+                <div className="relative grid gap-6 bg-[#2C3E50] px-6 py-6 sm:px-8 sm:py-8 lg:h-[58%] lg:grid-rows-[auto_auto_1fr_auto] lg:content-start">
                   <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[linear-gradient(180deg,rgba(122,146,163,0.16),rgba(44,62,80,0))]" />
                   <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,rgba(244,241,234,0),rgba(244,241,234,0.28),rgba(244,241,234,0))]" />
                   <div className="flex flex-wrap items-center gap-3">
@@ -244,16 +247,19 @@ export function AnnouncementsSection() {
                 </div>
               </motion.article>
             </Link>
-            <div className="grid gap-5">
+            <div className="relative lg:h-[clamp(620px,72vh,760px)]">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 hidden h-14 bg-[linear-gradient(0deg,#FFFFFF,rgba(255,255,255,0))] lg:block" />
+              <div className="flex flex-col gap-5 lg:h-full lg:overflow-y-auto lg:px-2 lg:pb-4" style={{ scrollbarWidth: "thin", scrollbarColor: "#A9B4BC transparent" }}>
               {filtered.slice(1).map((item, index) => (
                 <Link key={item.id ?? item.title} href={`/announcements/${item.id ?? index + 2}`} className="group block rounded-[2rem] focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/25">
-                  <motion.article whileHover={{ y: -4 }} className="h-full rounded-[2rem] border border-[#D8D4CC] bg-[#F4F1EA] p-6 transition-shadow hover:shadow-xl hover:shadow-[#2C3E50]/8">
+                  <motion.article whileHover={{ boxShadow: "0 18px 34px rgba(44,62,80,0.08)" }} className="relative rounded-[2rem] border border-[#D8D4CC] bg-[#F4F1EA] p-6 transition-shadow">
                     <span className="rounded-full border border-[#D8D4CC] bg-white px-3 py-1 text-xs font-semibold text-[#789285]">{item.category}</span>
                     <h3 className="mt-8 font-heading text-2xl font-semibold text-[#2C3E50]">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-6 text-[#6E6E6E]">{item.description}</p>
+                    <p className="mt-3 overflow-hidden text-sm leading-6 text-[#6E6E6E] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4]">{item.description}</p>
                   </motion.article>
                 </Link>
               ))}
+              </div>
             </div>
           </div>
         ) : (

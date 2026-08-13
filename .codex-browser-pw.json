@@ -1,0 +1,24 @@
+{
+  "keys": [],
+  "methods": [
+    "constructor",
+    "goBack",
+    "goForward",
+    "evaluate",
+    "locator",
+    "getByRole",
+    "getByText",
+    "getByLabel",
+    "getByPlaceholder",
+    "getByTestId",
+    "frameLocator",
+    "waitForURL",
+    "waitForLoadState",
+    "waitForTimeout",
+    "waitForEvent",
+    "expectNavigation",
+    "elementInfo",
+    "elementScreenshot",
+    "domSnapshot"
+  ]
+}

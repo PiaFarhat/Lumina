@@ -27,9 +27,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
-const HEADER_SAFE_OFFSET = 108;
-const QUIET_PERIOD_MS = 160;
-const WHEEL_TRIGGER_DELTA = 64;
+const HEADER_SAFE_OFFSET = 112;
+const QUIET_PERIOD_MS = 120;
+const WHEEL_TRIGGER_DELTA = 56;
 
 type SlideConfig = {
   eyebrow: string;
@@ -87,12 +87,12 @@ const slides: SlideConfig[] = [
 ];
 
 const desktopNodes: NetworkNode[] = [
-  { label: "Wi-Fi", icon: Wifi, x: 27, y: 15, tone: "bg-[#EEF3F5] text-[#2C3E50]" },
-  { label: "Security", icon: ShieldCheck, x: 15, y: 36, tone: "bg-[#EEF3F1] text-[#2C3E50]" },
-  { label: "Smart Lighting", icon: Lightbulb, x: 83, y: 29, tone: "bg-white text-[#2C3E50]" },
-  { label: "Smart Access", icon: KeyRound, x: 24, y: 71, tone: "bg-[#F5F0E6] text-[#2C3E50]" },
-  { label: "Concierge", icon: Bell, x: 78, y: 66, tone: "bg-[#EDF3F5] text-[#2C3E50]" },
-  { label: "Visitor Access", icon: CarFront, x: 44, y: 86, tone: "bg-[#EEF3F1] text-[#2C3E50]" },
+  { label: "Wi-Fi", icon: Wifi, x: 24, y: 14, tone: "bg-[#EEF3F5] text-[#2C3E50]" },
+  { label: "Security", icon: ShieldCheck, x: 12, y: 36, tone: "bg-[#EEF3F1] text-[#2C3E50]" },
+  { label: "Smart Lighting", icon: Lightbulb, x: 87, y: 27, tone: "bg-white text-[#2C3E50]" },
+  { label: "Smart Access", icon: KeyRound, x: 18, y: 74, tone: "bg-[#F5F0E6] text-[#2C3E50]" },
+  { label: "Concierge", icon: Bell, x: 82, y: 69, tone: "bg-[#EDF3F5] text-[#2C3E50]" },
+  { label: "Visitor Access", icon: CarFront, x: 48, y: 88, tone: "bg-[#EEF3F1] text-[#2C3E50]" },
 ];
 
 const mobileNodes: NetworkNode[] = [
@@ -202,17 +202,17 @@ function SlideCopy({
       </motion.p>
       <motion.h3
         animate={getCopyMotion(0.08, active, reduceMotion)}
-        className="mt-3 max-w-[11ch] font-heading font-semibold leading-[1.01] text-[#2C3E50] text-[clamp(2.05rem,3.6vw,4rem)]"
+        className="mt-3 max-w-[13ch] font-heading font-semibold leading-[1.01] text-[#2C3E50] text-[clamp(1.85rem,3vw,3.85rem)] lg:max-w-[14ch]"
       >
         {slide.title}
       </motion.h3>
       <motion.p
         animate={getCopyMotion(0.16, active, reduceMotion)}
-        className="mt-5 max-w-[38rem] text-[0.98rem] leading-7 text-[#6E6E6E] sm:text-[1.04rem] sm:leading-8 lg:text-[1.1rem]"
+        className="mt-4 max-w-[40rem] text-[0.94rem] leading-6 text-[#6E6E6E] sm:mt-5 sm:text-[1rem] sm:leading-7 lg:max-w-[36rem] lg:text-[1.06rem] lg:leading-8 xl:max-w-[40rem]"
       >
         {slide.description}
       </motion.p>
-      <div className="mt-7 flex flex-wrap gap-3">
+      <div className="mt-6 flex flex-wrap gap-2.5 sm:mt-7 sm:gap-3">
         {slide.highlights.map((item, index) => (
           <motion.span
             key={item}
@@ -224,7 +224,7 @@ function SlideCopy({
         ))}
       </div>
       {slide.cta ? (
-        <motion.div animate={getCopyMotion(0.3, active, reduceMotion)} className="mt-8">
+        <motion.div animate={getCopyMotion(0.3, active, reduceMotion)} className="mt-6 sm:mt-8">
           <a href={slide.cta.href} className="btn-secondary inline-flex items-center gap-2">
             {slide.cta.label}
             <ArrowRight className="h-4 w-4" aria-hidden />
@@ -250,8 +250,8 @@ function ConnectedLivingVisual({
   );
 
   return (
-    <div className="order-1 flex h-full min-h-[280px] w-full min-w-0 items-center justify-center sm:min-h-[320px] md:order-1 md:min-h-0">
-      <div className="relative h-full min-h-[280px] w-full max-w-[620px] overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[linear-gradient(180deg,rgba(252,251,247,0.94),rgba(244,241,234,0.98))] shadow-sm shadow-[#2C3E50]/8 sm:min-h-[320px] sm:rounded-[2.25rem] md:min-h-0 md:max-h-[500px]">
+    <div className="order-1 flex h-full min-h-[248px] w-full min-w-0 items-center justify-center sm:min-h-[280px] md:order-1 md:min-h-0">
+      <div className="relative h-full min-h-[248px] w-full max-w-[760px] overflow-hidden rounded-[1.8rem] border border-[#D8D4CC] bg-[linear-gradient(180deg,rgba(252,251,247,0.94),rgba(244,241,234,0.98))] shadow-sm shadow-[#2C3E50]/8 sm:min-h-[280px] sm:rounded-[2rem] md:min-h-0 md:max-h-[560px] lg:max-w-[820px]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(143,168,155,0.16),transparent_26%),radial-gradient(circle_at_84%_18%,rgba(122,146,163,0.14),transparent_24%),radial-gradient(circle_at_52%_88%,rgba(200,169,126,0.12),transparent_20%)]" />
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" aria-hidden>
           <motion.path
@@ -329,7 +329,7 @@ function ConnectedLivingVisual({
         </svg>
 
         <motion.div
-          className="absolute left-1/2 top-1/2 z-10 h-[30%] w-[30%] min-h-[126px] min-w-[126px] max-h-[176px] max-w-[176px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#D4D8D0] bg-[#FCFBF7] shadow-[0_18px_38px_rgba(44,62,80,0.10)]"
+          className="absolute left-1/2 top-1/2 z-10 h-[28%] w-[28%] min-h-[108px] min-w-[108px] max-h-[176px] max-w-[176px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#D4D8D0] bg-[#FCFBF7] shadow-[0_18px_38px_rgba(44,62,80,0.10)] lg:min-h-[126px] lg:min-w-[126px]"
           animate={
             reduceMotion
               ? { opacity: 1, scale: 1 }
@@ -377,7 +377,7 @@ function ConnectedLivingVisual({
               }}
             >
               <div
-                className={`-translate-x-1/2 -translate-y-1/2 rounded-[1.3rem] border border-[#D8D4CC] ${node.tone} min-w-[90px] px-3 py-2.5 text-center shadow-sm shadow-[#2C3E50]/6 sm:min-w-[106px] sm:px-3.5 sm:py-3`}
+                className={`-translate-x-1/2 -translate-y-1/2 rounded-[1.15rem] border border-[#D8D4CC] ${node.tone} min-w-[76px] px-2.5 py-2 text-center shadow-sm shadow-[#2C3E50]/6 sm:min-w-[88px] sm:px-3 sm:py-2.5 lg:min-w-[104px] lg:px-3.5 lg:py-3`}
               >
                 <Icon className="mx-auto h-4 w-4 text-[#2C3E50]" aria-hidden />
                 <p className="mt-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-[#5D7381] sm:text-[0.62rem]">
@@ -402,8 +402,8 @@ function EcoPlanVisual({
   reduceMotion: boolean;
 }) {
   return (
-    <div className="order-1 flex h-full min-h-[280px] w-full min-w-0 items-center justify-center sm:min-h-[320px] md:order-1 md:min-h-0">
-      <div className="relative h-full min-h-[280px] w-full max-w-[620px] overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[linear-gradient(180deg,rgba(251,250,245,0.94),rgba(244,241,234,0.98))] shadow-sm shadow-[#2C3E50]/8 sm:min-h-[320px] sm:rounded-[2.25rem] md:min-h-0 md:max-h-[500px]">
+    <div className="order-1 flex h-full min-h-[248px] w-full min-w-0 items-center justify-center sm:min-h-[280px] md:order-1 md:min-h-0">
+      <div className="relative h-full min-h-[248px] w-full max-w-[760px] overflow-hidden rounded-[1.8rem] border border-[#D8D4CC] bg-[linear-gradient(180deg,rgba(251,250,245,0.94),rgba(244,241,234,0.98))] shadow-sm shadow-[#2C3E50]/8 sm:min-h-[280px] sm:rounded-[2rem] md:min-h-0 md:max-h-[560px] lg:max-w-[820px]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(143,168,155,0.16),transparent_24%),radial-gradient(circle_at_82%_22%,rgba(200,169,126,0.13),transparent_22%),radial-gradient(circle_at_74%_76%,rgba(122,146,163,0.12),transparent_22%)]" />
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" aria-hidden>
           {[
@@ -468,7 +468,7 @@ function EcoPlanVisual({
         </svg>
 
         <motion.div
-          className="absolute left-[8%] top-[12%] h-[38%] w-[50%] rounded-[42%_58%_55%_45%/48%_42%_58%_52%] border border-[#CFE0D6] bg-[#E8F0E8]/92"
+          className="absolute left-[6%] top-[10%] h-[40%] w-[54%] rounded-[42%_58%_55%_45%/48%_42%_58%_52%] border border-[#CFE0D6] bg-[#E8F0E8]/92"
           animate={
             reduceMotion
               ? { opacity: 1, scale: 1, y: 0 }
@@ -486,7 +486,7 @@ function EcoPlanVisual({
         </motion.div>
 
         <motion.div
-          className="absolute right-[9%] top-[18%] h-[26%] w-[33%] rounded-[50%_50%_38%_62%/45%_38%_62%_55%] border border-[#D9D6C8] bg-[#F5F0E6]/92"
+          className="absolute right-[6%] top-[16%] h-[28%] w-[35%] rounded-[50%_50%_38%_62%/45%_38%_62%_55%] border border-[#D9D6C8] bg-[#F5F0E6]/92"
           animate={
             reduceMotion
               ? { opacity: 1, scale: 1, y: 0 }
@@ -504,7 +504,7 @@ function EcoPlanVisual({
         </motion.div>
 
         <motion.div
-          className="absolute bottom-[11%] left-[21%] h-[29%] w-[52%] rounded-[56%_44%_50%_50%/44%_54%_46%_56%] border border-[#D2DEE4] bg-[#EEF3F5]/94"
+          className="absolute bottom-[10%] left-[18%] h-[31%] w-[56%] rounded-[56%_44%_50%_50%/44%_54%_46%_56%] border border-[#D2DEE4] bg-[#EEF3F5]/94"
           animate={
             reduceMotion
               ? { opacity: 1, scale: 1, y: 0 }
@@ -522,7 +522,7 @@ function EcoPlanVisual({
         </motion.div>
 
         <motion.div
-          className="absolute left-[56%] top-[56%] flex items-center gap-2 rounded-full border border-[#D8D4CC] bg-white/82 px-3 py-2 text-[#789285] shadow-sm"
+          className="absolute left-[58%] top-[58%] flex items-center gap-2 rounded-full border border-[#D8D4CC] bg-white/82 px-3 py-2 text-[#789285] shadow-sm"
           animate={
             reduceMotion
               ? { opacity: active ? 1 : 0.4, scale: 1 }
@@ -548,8 +548,8 @@ function ServiceFlowVisual({
   reduceMotion: boolean;
 }) {
   return (
-    <div className="order-1 flex h-full min-h-[280px] w-full min-w-0 items-center justify-center sm:min-h-[320px] md:order-1 md:min-h-0">
-      <div className="relative h-full min-h-[280px] w-full max-w-[620px] overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[linear-gradient(180deg,rgba(251,250,246,0.94),rgba(244,241,234,0.98))] shadow-sm shadow-[#2C3E50]/8 sm:min-h-[320px] sm:rounded-[2.25rem] md:min-h-0 md:max-h-[500px]">
+    <div className="order-1 flex h-full min-h-[248px] w-full min-w-0 items-center justify-center sm:min-h-[280px] md:order-1 md:min-h-0">
+      <div className="relative h-full min-h-[248px] w-full max-w-[760px] overflow-hidden rounded-[1.8rem] border border-[#D8D4CC] bg-[linear-gradient(180deg,rgba(251,250,246,0.94),rgba(244,241,234,0.98))] shadow-sm shadow-[#2C3E50]/8 sm:min-h-[280px] sm:rounded-[2rem] md:min-h-0 md:max-h-[560px] lg:max-w-[820px]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(122,146,163,0.14),transparent_22%),radial-gradient(circle_at_82%_78%,rgba(200,169,126,0.13),transparent_22%)]" />
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" aria-hidden>
           {[
@@ -634,7 +634,7 @@ function ServiceFlowVisual({
                 <div className="absolute left-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/88 text-[#2C3E50] shadow-sm">
                   <Icon className="h-4 w-4" aria-hidden />
                 </div>
-                <div className="absolute inset-x-0 bottom-0 p-3 text-white sm:p-4">
+                <div className="absolute inset-x-0 bottom-0 p-2.5 text-white sm:p-3 lg:p-4">
                   <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-white/70">
                     Service
                   </p>
@@ -700,7 +700,7 @@ export function LuminaStandard() {
   }, [activeIndex]);
 
   useEffect(() => {
-    const media = window.matchMedia("(min-width: 768px)");
+    const media = window.matchMedia("(min-width: 1024px)");
     const update = () => setIsDesktop(media.matches);
 
     update();
@@ -718,11 +718,9 @@ export function LuminaStandard() {
     function isStageEngaged() {
       const rect = stageEl.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-      const visibleTop = Math.max(rect.top, HEADER_SAFE_OFFSET);
-      const visibleBottom = Math.min(rect.bottom, viewportHeight - 12);
-      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-      const visibleRatio = visibleHeight / rect.height;
-      return rect.top <= HEADER_SAFE_OFFSET + 24 && visibleRatio >= 0.76;
+      const topAligned = rect.top <= HEADER_SAFE_OFFSET + 56;
+      const bottomVisible = rect.bottom >= Math.min(viewportHeight * 0.7, HEADER_SAFE_OFFSET + 340);
+      return topAligned && bottomVisible;
     }
 
     function tryUnlock() {
@@ -803,26 +801,26 @@ export function LuminaStandard() {
   return (
     <section
       id="lumina-standard"
-      className="relative scroll-mt-28 overflow-hidden bg-[#F8F5EE] px-4 pb-16 pt-28 sm:pb-20 sm:pt-32 lg:scroll-mt-32 lg:pb-24 lg:pt-36"
+            className="relative scroll-mt-28 overflow-hidden bg-[#F8F5EE] px-4 pb-16 pt-32 sm:pb-20 sm:pt-36 lg:scroll-mt-32 lg:pb-24 lg:pt-32"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_14%,rgba(122,146,163,0.12),transparent_24%),radial-gradient(circle_at_20%_84%,rgba(143,168,155,0.08),transparent_22%)]" />
         <div className="absolute bottom-0 right-0 h-[48%] w-[62%] rounded-tl-[8rem] bg-[linear-gradient(180deg,rgba(220,229,232,0.12),rgba(220,229,232,0.28))]" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-[1480px]">
-        <div className="mb-5 max-w-[42rem] md:mb-6 lg:mb-8">
+      <div className="relative mx-auto w-full max-w-[min(96vw,1780px)]">
+        <div className="mb-5 max-w-[52rem] md:mb-6 lg:mb-8 xl:max-w-[56rem]">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[#8FA89B] sm:text-xs">
             THE LUMINA STANDARD
           </p>
-          <h2 className="mt-3 max-w-[12ch] font-heading font-semibold leading-[1.02] text-[#2C3E50] text-[clamp(2.4rem,4vw,4.2rem)]">
+          <h2 className="mt-3 max-w-[15ch] font-heading font-semibold leading-[1.02] text-[#2C3E50] text-[clamp(2.5rem,4vw,4.25rem)] lg:max-w-[13ch]">
             What the community is designed to support.
           </h2>
         </div>
 
         <div
           ref={stageRef}
-          className="relative mx-auto overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-white/52 shadow-sm shadow-[#2C3E50]/8 h-[clamp(560px,72svh,700px)] max-w-[430px] pr-8 sm:h-[clamp(600px,74svh,760px)] sm:max-w-[520px] sm:pr-10 md:h-[clamp(600px,calc(100svh-132px),720px)] md:max-w-none md:rounded-[2.2rem] md:pr-12 lg:h-[clamp(620px,calc(100svh-138px),760px)] lg:rounded-[2.4rem] lg:pr-14"
+          className="relative mx-auto h-[clamp(560px,calc(100svh-188px),720px)] max-w-[430px] overflow-hidden pr-0 sm:h-[clamp(600px,calc(100svh-198px),760px)] sm:max-w-[520px] md:h-[clamp(620px,calc(100svh-176px),760px)] md:max-w-none md:pr-12 lg:h-[clamp(560px,calc(100svh-188px),760px)] lg:pr-14 xl:h-[clamp(600px,calc(100svh-196px),780px)]"
         >
           <Swiper
             modules={[A11y]}
@@ -857,7 +855,7 @@ export function LuminaStandard() {
 
               return (
                 <SwiperSlide key={slide.title} className="!h-full">
-                  <div className="grid h-full min-h-0 min-w-0 grid-cols-1 grid-rows-[minmax(290px,1.2fr)_auto] gap-4 px-5 py-5 sm:grid-rows-[minmax(330px,1.15fr)_auto] sm:px-6 sm:py-6 md:grid-cols-[minmax(0,0.52fr)_minmax(0,0.48fr)] md:grid-rows-1 md:items-center md:gap-6 md:px-7 md:py-7 lg:grid-cols-[minmax(0,0.54fr)_minmax(0,0.46fr)] lg:gap-8 lg:px-8 lg:py-8 xl:px-10 xl:py-9">
+                  <div className="grid h-full min-h-0 min-w-0 grid-cols-1 grid-rows-[auto_minmax(0,1fr)] gap-3 px-1 py-4 sm:grid-rows-[auto_minmax(0,1fr)] sm:gap-4 sm:px-2 sm:py-5 md:grid-cols-[minmax(0,0.48fr)_minmax(0,0.52fr)] md:grid-rows-1 md:items-center md:gap-7 md:px-2 md:py-4 lg:grid-cols-[minmax(0,0.5fr)_minmax(0,0.5fr)] lg:gap-8 lg:px-3 lg:py-5 xl:grid-cols-[minmax(0,0.52fr)_minmax(0,0.48fr)] xl:gap-10 xl:px-4 xl:py-6">
                     <SlideCopy slide={slide} active={active} reduceMotion={reduceMotion} />
                     <SlideVisual
                       index={index}
@@ -872,7 +870,7 @@ export function LuminaStandard() {
           </Swiper>
 
           <div
-            className="absolute right-3 top-1/2 flex -translate-y-1/2 flex-col items-center gap-2 md:right-4 md:gap-2.5"
+            className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 md:bottom-auto md:left-auto md:right-4 md:top-1/2 md:flex-col md:-translate-y-1/2 md:translate-x-0 md:gap-2.5"
             aria-label="Lumina standard slide pagination"
           >
             {pagination.map((index) => {
@@ -883,14 +881,14 @@ export function LuminaStandard() {
                   key={index}
                   type="button"
                   onClick={() => swiper?.slideTo(index)}
-                  className="flex h-[34px] w-4 items-center justify-center focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20 md:h-[40px]"
+                  className="flex h-4 w-[34px] items-center justify-center focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20 md:h-[40px] md:w-4"
                   aria-label={`Go to slide ${index + 1}`}
                   aria-current={active ? "true" : undefined}
                 >
                   <motion.span
                     animate={{
-                      width: 5.5,
-                      height: active ? 30 : 6,
+                      width: isDesktop ? 5.5 : active ? 30 : 6,
+                      height: isDesktop ? (active ? 30 : 6) : 5.5,
                       backgroundColor: active ? "#7A92A3" : "#D8D4CC",
                     }}
                     transition={{ duration: 0.34, ease: easeOut }}

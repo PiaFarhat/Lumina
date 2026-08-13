@@ -1,0 +1,24 @@
+{
+  "keys": [
+    "id",
+    "playwright",
+    "dom_cua",
+    "cua",
+    "content",
+    "clipboard",
+    "dev",
+    "capabilities"
+  ],
+  "own": {
+    "id": "string",
+    "playwright": "object",
+    "dom_cua": "object",
+    "cua": "object",
+    "content": "object",
+    "clipboard": "object",
+    "dev": "object",
+    "capabilities": "object"
+  },
+  "hasPlaywright": true,
+  "playwrightType": "object"
+}

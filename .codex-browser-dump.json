@@ -1,0 +1,12 @@
+{
+  "hasAgent": true,
+  "hasBrowser": true,
+  "browserKeys": [
+    "browserId",
+    "capabilities",
+    "tabs",
+    "user"
+  ],
+  "userKeys": [],
+  "tabsKeys": []
+}
