@@ -19,7 +19,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
 
   if (isLoading || !isAuthenticated) {
     return (
-      <main className="grid min-h-screen place-items-center bg-[#F4F1EA] px-4 text-[#2C3E50]">
+      <main className="grid min-h-dvh place-items-center bg-[#F4F1EA] px-4 text-[#2C3E50]">
         <div className="grid justify-items-center gap-4">
           <LuminaMark size="md" />
           <p className="text-sm font-semibold text-[#789285]">Opening Lumina</p>

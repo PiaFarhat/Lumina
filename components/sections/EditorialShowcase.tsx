@@ -218,35 +218,39 @@ function MobileMarqueeRow({
 }) {
   const initialX = direction === "left" ? "0%" : "-50%";
   const animateX = direction === "left" ? "-50%" : "0%";
+  const wrapperHeight =
+    "h-[90px] min-[360px]:h-[98px] min-[390px]:h-[104px] min-[430px]:h-[112px]";
 
   return (
-    <div className="-mx-[14px] overflow-hidden px-[14px] min-[390px]:-mx-4 min-[390px]:px-4">
-      <motion.div
-        initial={{ x: initialX }}
-        animate={reduceMotion ? { x: initialX } : { x: animateX }}
-        transition={
-          reduceMotion
-            ? undefined
-            : {
-                duration,
-                ease: "linear",
-                repeat: Infinity,
-              }
-        }
-        className="flex w-max gap-2 min-[390px]:gap-2.5"
-      >
-        {[0, 1].map((setIndex) => (
-          <div key={setIndex} className="flex gap-2 min-[390px]:gap-2.5">
-            {cards.map((card) => (
-              <ShowcaseCard
-                key={`${setIndex}-${card.title}`}
-                card={card}
-                className="h-[90px] w-[142px] flex-none rounded-[0.95rem] !aspect-auto min-[360px]:h-[98px] min-[360px]:w-[150px] min-[390px]:h-[104px] min-[390px]:w-[168px] min-[430px]:h-[112px] min-[430px]:w-[184px]"
-              />
-            ))}
-          </div>
-        ))}
-      </motion.div>
+    <div className={`relative w-full min-w-0 overflow-hidden [contain:layout_paint] ${wrapperHeight}`}>
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          initial={{ x: initialX }}
+          animate={reduceMotion ? { x: initialX } : { x: animateX }}
+          transition={
+            reduceMotion
+              ? undefined
+              : {
+                  duration,
+                  ease: "linear",
+                  repeat: Infinity,
+                }
+          }
+          className="absolute left-0 top-0 inline-flex w-max gap-2 min-[390px]:gap-2.5 will-change-transform"
+        >
+          {[0, 1].map((setIndex) => (
+            <div key={setIndex} className="flex gap-2 min-[390px]:gap-2.5">
+              {cards.map((card) => (
+                <ShowcaseCard
+                  key={`${setIndex}-${card.title}`}
+                  card={card}
+                  className="h-[90px] w-[142px] flex-none rounded-[0.95rem] !aspect-auto min-[360px]:h-[98px] min-[360px]:w-[150px] min-[390px]:h-[104px] min-[390px]:w-[168px] min-[430px]:h-[112px] min-[430px]:w-[184px]"
+                />
+              ))}
+            </div>
+          ))}
+        </motion.div>
+      </div>
     </div>
   );
 }
@@ -255,7 +259,7 @@ export function EditorialShowcase() {
   const reduceMotion = !!useReducedMotion();
 
   return (
-    <section className="relative bg-[#F8F5EE] px-[14px] py-12 sm:px-4 sm:py-14 lg:py-24 xl:py-28">
+    <section className="lumina-editorial relative overflow-x-hidden bg-[#F8F5EE] px-[14px] py-12 sm:px-4 sm:py-14 lg:py-18 xl:py-20">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
         <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(248,245,238,0.96),rgba(248,245,238,0))] lg:h-32" />
         <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(0deg,rgba(248,245,238,0.98),rgba(248,245,238,0))] lg:h-36" />
@@ -319,23 +323,23 @@ export function EditorialShowcase() {
           </motion.div>
 
           <div className="hidden w-full min-w-0 lg:block">
-            <div className="relative h-[clamp(600px,68vh,740px)] w-full overflow-hidden rounded-[2rem]">
+            <div className="relative h-[clamp(500px,56vh,620px)] w-full overflow-hidden rounded-[2rem]">
               <div className="grid h-full grid-cols-2 gap-[clamp(18px,1.8vw,28px)]">
                 <MediaColumn
                   cards={columnOneCards}
                   direction="up"
                   duration={20}
                   reduceMotion={reduceMotion}
-                  cardClassName="!aspect-auto h-[clamp(240px,30vh,330px)] rounded-[1.6rem] xl:rounded-[1.75rem]"
-                  className="w-full pt-6 xl:pt-8"
+                  cardClassName="!aspect-auto h-[clamp(210px,24vh,280px)] rounded-[1.6rem] xl:rounded-[1.75rem]"
+                  className="w-full pt-4 xl:pt-6"
                 />
                 <MediaColumn
                   cards={columnTwoCards}
                   direction="down"
                   duration={24}
                   reduceMotion={reduceMotion}
-                  cardClassName="!aspect-auto h-[clamp(240px,30vh,330px)] rounded-[1.6rem] xl:rounded-[1.75rem]"
-                  className="w-full pt-20 xl:pt-24"
+                  cardClassName="!aspect-auto h-[clamp(210px,24vh,280px)] rounded-[1.6rem] xl:rounded-[1.75rem]"
+                  className="w-full pt-14 xl:pt-16"
                 />
               </div>
               <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-[linear-gradient(180deg,rgba(248,245,238,0.82),rgba(248,245,238,0))] xl:h-12" />
@@ -343,7 +347,7 @@ export function EditorialShowcase() {
             </div>
           </div>
 
-          <div className="hidden md:block lg:hidden">
+          <div className="hidden min-w-0 md:block lg:hidden">
             <div className="grid gap-4 md:grid-cols-2">
               {mobileCards.map((card, index) => (
                 <ShowcaseCard
@@ -355,7 +359,7 @@ export function EditorialShowcase() {
             </div>
           </div>
 
-          <div className="md:hidden">
+          <div className="min-w-0 md:hidden">
             <div className="mt-6 space-y-2 min-[390px]:space-y-2.5">
               <MobileMarqueeRow
                 cards={mobileRowOneCards}

@@ -51,11 +51,11 @@ const requestStatusFilters: Array<"All" | MaintenanceStatus> = [
 
 export function CommunityOverview() {
   return (
-    <section id="overview" className="px-4 py-20">
+    <section id="overview" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
       <div className="mx-auto max-w-7xl">
         <SectionHeading eyebrow="Community Overview" title="A composed view of everything moving through Lumina." description="Metrics are arranged for scanning, not boxed into a generic dashboard." />
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-12 grid gap-5 lg:grid-cols-12">
-          <motion.article variants={fadeUp} className="relative min-h-96 overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-white shadow-sm lg:col-span-7 lg:row-span-2">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-12">
+          <motion.article variants={fadeUp} className="relative min-h-[19rem] overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-white shadow-sm sm:min-h-[21rem] lg:col-span-7 lg:row-span-2">
             <Image
               src={images.reception}
               alt="Lumina entrance gate with illuminated signage and landscaped arrival drive"
@@ -92,10 +92,10 @@ export function CommunityOverview() {
 
 export function QuickServices({ onRequest }: HomeSectionsProps) {
   return (
-    <section id="services" className="px-4 py-20">
+    <section id="services" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
       <div className="mx-auto max-w-7xl">
         <SectionHeading eyebrow="Quick Services" title="Resident requests with hospitality-level clarity." />
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-8 grid gap-5 sm:mt-10 md:grid-cols-2 xl:grid-cols-4">
           {services.map((service) => {
             const Icon = service.icon;
             return (
@@ -112,7 +112,7 @@ export function QuickServices({ onRequest }: HomeSectionsProps) {
                   <Icon className="h-7 w-7 origin-center transition duration-200 group-hover:scale-110 group-hover:text-[#789285]" aria-hidden />
                 </span>
                 <h3 className="mt-6 font-heading text-2xl font-semibold text-[#2C3E50] md:mt-10">{service.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#6E6E6E] md:mt-4 md:min-h-24">{service.description}</p>
+                <p className="mt-3 text-sm leading-6 text-[#6E6E6E] md:mt-4 md:min-h-20">{service.description}</p>
                 <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#789285]">
                   {service.action}
                   <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
@@ -162,7 +162,7 @@ export function AnnouncementsSection() {
   const featuredAnnouncement = filtered[0];
 
   return (
-    <section id="announcements" className="relative isolate bg-white px-4 py-20">
+    <section id="announcements" className="relative isolate bg-white px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[1fr_380px] lg:items-end">
           <SectionHeading eyebrow="Announcements" title="Notices that feel considered, not broadcast." />
@@ -170,8 +170,8 @@ export function AnnouncementsSection() {
         </div>
         {error ? <p className="mt-6 rounded-2xl border border-[#D8D4CC] bg-[#F4F1EA] px-4 py-3 text-sm text-[#6E6E6E]">{error}</p> : null}
         {isLoading ? (
-          <div className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.58fr)_minmax(320px,0.92fr)] lg:items-start">
-            <div className="overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#2C3E50] shadow-sm lg:h-[clamp(620px,72vh,760px)]">
+          <div className="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-[minmax(0,1.58fr)_minmax(320px,0.92fr)] lg:items-start">
+            <div className="overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#2C3E50] shadow-sm lg:h-[clamp(500px,58vh,620px)]">
               <div className="aspect-[16/10] bg-[#F4F1EA] p-8">
                 <LoadingSkeleton />
               </div>
@@ -182,7 +182,7 @@ export function AnnouncementsSection() {
                 <LoadingSkeleton />
               </div>
             </div>
-            <div className="relative lg:h-[clamp(620px,72vh,760px)]">
+            <div className="relative lg:h-[clamp(500px,58vh,620px)]">
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 hidden h-14 bg-[linear-gradient(0deg,#FFFFFF,rgba(255,255,255,0))] lg:block" />
               <div className="flex gap-5 lg:h-full lg:flex-col lg:overflow-y-auto lg:px-2 lg:pb-4" style={{ scrollbarWidth: "thin", scrollbarColor: "#A9B4BC transparent" }}>
                 <div className="rounded-[2rem] border border-[#D8D4CC] bg-[#F4F1EA] p-6"><LoadingSkeleton /></div>
@@ -191,10 +191,10 @@ export function AnnouncementsSection() {
             </div>
           </div>
         ) : filtered.length ? (
-          <div className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.58fr)_minmax(320px,0.92fr)] lg:items-start">
+          <div className="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-[minmax(0,1.58fr)_minmax(320px,0.92fr)] lg:items-start">
             <Link
               href={`/announcements/${featuredAnnouncement?.id ?? 1}`}
-              className="group relative block overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#2C3E50] shadow-sm focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/25 lg:h-[clamp(620px,72vh,760px)]"
+              className="group relative block overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#2C3E50] shadow-sm focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/25 lg:h-[clamp(500px,58vh,620px)]"
             >
               <motion.article whileHover={{ y: -4 }} className="overflow-hidden rounded-[2rem] text-white lg:flex lg:h-full lg:flex-col">
                 <div className="relative aspect-[16/10] overflow-hidden lg:h-[42%] lg:min-h-[248px] lg:shrink-0 lg:aspect-auto">
@@ -247,7 +247,7 @@ export function AnnouncementsSection() {
                 </div>
               </motion.article>
             </Link>
-            <div className="relative lg:h-[clamp(620px,72vh,760px)]">
+            <div className="relative lg:h-[clamp(500px,58vh,620px)]">
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 hidden h-14 bg-[linear-gradient(0deg,#FFFFFF,rgba(255,255,255,0))] lg:block" />
               <div className="flex flex-col gap-5 lg:h-full lg:overflow-y-auto lg:px-2 lg:pb-4" style={{ scrollbarWidth: "thin", scrollbarColor: "#A9B4BC transparent" }}>
               {filtered.slice(1).map((item, index) => (
@@ -263,7 +263,7 @@ export function AnnouncementsSection() {
             </div>
           </div>
         ) : (
-          <div className="mt-12"><EmptyState title="No announcements match your search." /></div>
+          <div className="mt-8 sm:mt-10"><EmptyState title="No announcements match your search." /></div>
         )}
       </div>
     </section>
@@ -283,7 +283,7 @@ export function RequestStatus({ requests, source }: RequestStatusProps) {
   );
 
   return (
-    <section className="px-4 py-20">
+    <section className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <SectionHeading eyebrow="Request Status" title="A quiet timeline for active work." />
@@ -370,7 +370,7 @@ export function RequestStatus({ requests, source }: RequestStatusProps) {
 
 export function ConciergeSection({ onRequest }: HomeSectionsProps) {
   return (
-    <section className="bg-[#2C3E50] px-4 py-20 text-white">
+    <section className="bg-[#2C3E50] px-4 py-14 sm:py-16 lg:py-18 xl:py-20 text-white">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#C8A97E]">Concierge</p>
@@ -381,7 +381,7 @@ export function ConciergeSection({ onRequest }: HomeSectionsProps) {
           </button>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="relative min-h-72 overflow-hidden rounded-[2rem] border border-white/12 sm:col-span-2">
+          <div className="relative min-h-64 overflow-hidden rounded-[2rem] border border-white/12 sm:min-h-72 sm:col-span-2">
             <Image src={images.clubhouse} alt="Lumina clubhouse amenities with poolside lounge seating" fill sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover transition duration-700 hover:scale-[1.03]" />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(44,62,80,0.7))]" />
             <div className="absolute bottom-0 p-5 sm:p-6">
@@ -411,7 +411,7 @@ export function ParkingSection({ onRequest }: HomeSectionsProps) {
   const reserved = spaces.length - available;
 
   return (
-    <section id="parking" className="px-4 py-20">
+    <section id="parking" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <SectionHeading eyebrow="Parking" title="Visitor arrival, visually managed." description="Availability, reserved bays, and occupancy are readable at a glance." />
@@ -464,7 +464,7 @@ export function ParkingSection({ onRequest }: HomeSectionsProps) {
 
 export function EventsSection() {
   return (
-    <section className="bg-white px-4 py-20">
+    <section className="bg-white px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="flex items-end justify-between gap-6">
           <SectionHeading eyebrow="Community Events" title="The rhythm of the compound." />
@@ -473,21 +473,23 @@ export function EventsSection() {
             <button className="event-next rounded-full border border-[#D8D4CC] p-3 text-[#2C3E50] hover:bg-[#F4F1EA]" aria-label="Next event"><ChevronRight className="h-5 w-5" /></button>
           </div>
         </div>
-        <Swiper modules={[Navigation, A11y]} navigation={{ prevEl: ".event-prev", nextEl: ".event-next" }} spaceBetween={20} slidesPerView={1.1} breakpoints={{ 768: { slidesPerView: 2.2 }, 1180: { slidesPerView: 3.2 } }} className="mt-12 !overflow-visible">
-          {events.map((event) => (
-            <SwiperSlide key={event.title}>
-              <article className="group relative min-h-80 overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#F4F1EA] p-7">
-                <Image src={event.image} alt={event.alt} fill sizes="(min-width: 1180px) 32vw, (min-width: 768px) 45vw, 90vw" className="scale-[1.01] object-cover object-center transition duration-700 group-hover:scale-[1.05]" />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.04),rgba(44,62,80,0.78))]" />
-                <div className="relative flex min-h-64 flex-col justify-end text-white">
-                  <p className="text-sm font-semibold text-[#F4F1EA]">{event.date}</p>
-                  <h3 className="mt-4 font-heading text-2xl font-semibold sm:text-3xl">{event.title}</h3>
-                  <p className="mt-4 inline-flex items-center gap-2 text-sm text-white/74"><MapPin className="h-4 w-4" aria-hidden />{event.location}</p>
-                </div>
-              </article>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div className="mt-12 overflow-x-hidden">
+          <Swiper modules={[Navigation, A11y]} navigation={{ prevEl: ".event-prev", nextEl: ".event-next" }} spaceBetween={20} slidesPerView={1.1} breakpoints={{ 768: { slidesPerView: 2.2 }, 1180: { slidesPerView: 3.2 } }} className="w-full overflow-hidden">
+            {events.map((event) => (
+              <SwiperSlide key={event.title}>
+                <article className="group relative min-h-[18rem] overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-[#F4F1EA] p-7 sm:min-h-80">
+                  <Image src={event.image} alt={event.alt} fill sizes="(min-width: 1180px) 32vw, (min-width: 768px) 45vw, 90vw" className="scale-[1.01] object-cover object-center transition duration-700 group-hover:scale-[1.05]" />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.04),rgba(44,62,80,0.78))]" />
+                  <div className="relative flex min-h-64 flex-col justify-end text-white">
+                    <p className="text-sm font-semibold text-[#F4F1EA]">{event.date}</p>
+                    <h3 className="mt-4 font-heading text-2xl font-semibold sm:text-3xl">{event.title}</h3>
+                    <p className="mt-4 inline-flex items-center gap-2 text-sm text-white/74"><MapPin className="h-4 w-4" aria-hidden />{event.location}</p>
+                  </div>
+                </article>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </section>
   );
@@ -609,12 +611,12 @@ export function ResidentsGalleryContact({ onRequest, galleryAlbums, gallerySourc
 
   return (
     <>
-      <section id="residents" className="px-4 py-20">
+      <section id="residents" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
         <div className="mx-auto max-w-7xl">
           <SectionHeading eyebrow="Residents" title="A private preview of the people who shape Lumina." />
           {residentsError ? <p className="mt-6 rounded-2xl border border-[#D8D4CC] bg-white px-4 py-3 text-sm text-[#6E6E6E]">{residentsError}</p> : null}
           <div className="mt-12 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="relative min-h-[430px] overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-white">
+            <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-white sm:min-h-[400px]">
               <Image src={images.villa} alt="Lumina villa exterior in a landscaped private residential lane" fill sizes="(min-width: 1024px) 54vw, 100vw" className="object-cover transition duration-700 hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(44,62,80,0.58))]" />
               <div className="absolute bottom-0 p-7 text-white">
@@ -646,7 +648,7 @@ export function ResidentsGalleryContact({ onRequest, galleryAlbums, gallerySourc
           </div>
         </div>
       </section>
-      <section id="gallery" className="bg-white px-4 py-20">
+      <section id="gallery" className="bg-white px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
         <div className="mx-auto max-w-7xl">
           <SectionHeading eyebrow="Gallery" title="Architectural moments across the community." />
           {gallerySource === "fallback" ? (
@@ -687,11 +689,11 @@ export function ResidentsGalleryContact({ onRequest, galleryAlbums, gallerySourc
           )}
         </div>
       </section>
-      <section id="contact" className="px-4 py-20">
+      <section id="contact" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading eyebrow="Contact" title="Clear lines for office, security, and urgent needs." />
           <div className="rounded-[2rem] border border-[#D8D4CC] bg-white p-6">
-            <div className="relative mb-5 h-72 overflow-hidden rounded-[1.5rem]">
+            <div className="relative mb-5 h-60 overflow-hidden rounded-[1.5rem] sm:h-72">
               <Image src={images.reception} alt="Lumina reception gate and security entrance" fill sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover transition duration-700 hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(44,62,80,0.54))]" />
             </div>
@@ -737,7 +739,7 @@ export function ResidentsGalleryContact({ onRequest, galleryAlbums, gallerySourc
               if (event.target === event.currentTarget) closeGalleryAlbum();
             }}
           >
-            <motion.div initial={{ opacity: 0, y: 24, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.98 }} transition={{ duration: 0.28 }} className="my-6 max-h-[calc(100vh-2rem)] w-full max-w-6xl overflow-y-auto rounded-[2rem] bg-white shadow-2xl">
+            <motion.div initial={{ opacity: 0, y: 24, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.98 }} transition={{ duration: 0.28 }} className="my-6 max-h-[calc(100dvh-2rem)] w-full max-w-6xl overflow-y-auto rounded-[2rem] bg-white shadow-2xl">
               <div className="relative min-h-72 overflow-hidden bg-[#2C3E50] sm:min-h-96">
                 <Image src={activeGallery.coverImage} alt={activeGallery.alt} fill sizes="90vw" className="object-cover" />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.04),rgba(44,62,80,0.82))]" />

@@ -1,0 +1,328 @@
+{
+  "bodyScrollWidth": 2669,
+  "innerHeight": 698,
+  "innerWidth": 762,
+  "offenders": [
+    {
+      "className": "flex min-w-max gap-2 min-[390px]:gap-2.5",
+      "id": "",
+      "left": -442.39,
+      "right": 711.61,
+      "tag": "DIV",
+      "width": 1154
+    },
+    {
+      "className": "flex gap-2 min-[390px]:gap-2.5",
+      "id": "",
+      "left": -442.39,
+      "right": 129.61,
+      "tag": "DIV",
+      "width": 572
+    },
+    {
+      "className": "group relative w-full overflow-hidden rounded-[1.75rem] border border-[#D8D4CC] bg-white shadow-sm shadow-[#2C3E50]/8 aspect-[4/5] h-[90px] w-[142px] flex-none rounded-[0.95rem] !aspect-auto min-[360px]:h-[98px] min-[360px]:w-[150px] min-[390px]:h-[104px] min-[390px]:w-[168px] min-[430px]:h-[112px] min-[430px]:w-[184px]",
+      "id": "",
+      "left": -442.39,
+      "right": -258.39,
+      "tag": "ARTICLE",
+      "width": 184
+    },
+    {
+      "className": "object-cover transition duration-700 group-hover:scale-[1.03]",
+      "id": "",
+      "left": -441.59,
+      "right": -259.19,
+      "tag": "IMG",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.06),rgba(44,62,80,0.72))]",
+      "id": "",
+      "left": -441.59,
+      "right": -259.19,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-x-0 bottom-0 p-2.5 text-white min-[390px]:p-3 sm:p-5",
+      "id": "",
+      "left": -441.59,
+      "right": -259.19,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-[#F4F1EA]/84 sm:text-[0.68rem] sm:tracking-[0.22em]",
+      "id": "",
+      "left": -421.59,
+      "right": -279.19,
+      "tag": "P",
+      "width": 142.4
+    },
+    {
+      "className": "mt-1.5 max-w-[14ch] font-heading text-[0.98rem] font-semibold leading-tight min-[390px]:text-[1.06rem] sm:mt-2 sm:max-w-[16ch] sm:text-lg xl:text-xl 2xl:text-2xl",
+      "id": "",
+      "left": -421.59,
+      "right": -279.19,
+      "tag": "H3",
+      "width": 142.4
+    },
+    {
+      "className": "group relative w-full overflow-hidden rounded-[1.75rem] border border-[#D8D4CC] bg-white shadow-sm shadow-[#2C3E50]/8 aspect-[4/3] h-[90px] w-[142px] flex-none rounded-[0.95rem] !aspect-auto min-[360px]:h-[98px] min-[360px]:w-[150px] min-[390px]:h-[104px] min-[390px]:w-[168px] min-[430px]:h-[112px] min-[430px]:w-[184px]",
+      "id": "",
+      "left": -248.39,
+      "right": -64.39,
+      "tag": "ARTICLE",
+      "width": 184
+    },
+    {
+      "className": "object-cover transition duration-700 group-hover:scale-[1.03]",
+      "id": "",
+      "left": -247.59,
+      "right": -65.19,
+      "tag": "IMG",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.06),rgba(44,62,80,0.72))]",
+      "id": "",
+      "left": -247.59,
+      "right": -65.19,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-x-0 bottom-0 p-2.5 text-white min-[390px]:p-3 sm:p-5",
+      "id": "",
+      "left": -247.59,
+      "right": -65.19,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-[#F4F1EA]/84 sm:text-[0.68rem] sm:tracking-[0.22em]",
+      "id": "",
+      "left": -227.59,
+      "right": -85.19,
+      "tag": "P",
+      "width": 142.4
+    },
+    {
+      "className": "mt-1.5 max-w-[14ch] font-heading text-[0.98rem] font-semibold leading-tight min-[390px]:text-[1.06rem] sm:mt-2 sm:max-w-[16ch] sm:text-lg xl:text-xl 2xl:text-2xl",
+      "id": "",
+      "left": -227.59,
+      "right": -85.19,
+      "tag": "H3",
+      "width": 142.4
+    },
+    {
+      "className": "group relative w-full overflow-hidden rounded-[1.75rem] border border-[#D8D4CC] bg-white shadow-sm shadow-[#2C3E50]/8 aspect-[4/3] h-[90px] w-[142px] flex-none rounded-[0.95rem] !aspect-auto min-[360px]:h-[98px] min-[360px]:w-[150px] min-[390px]:h-[104px] min-[390px]:w-[168px] min-[430px]:h-[112px] min-[430px]:w-[184px]",
+      "id": "",
+      "left": -54.39,
+      "right": 129.61,
+      "tag": "ARTICLE",
+      "width": 184
+    },
+    {
+      "className": "object-cover transition duration-700 group-hover:scale-[1.03]",
+      "id": "",
+      "left": -53.59,
+      "right": 128.81,
+      "tag": "IMG",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.06),rgba(44,62,80,0.72))]",
+      "id": "",
+      "left": -53.59,
+      "right": 128.81,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-x-0 bottom-0 p-2.5 text-white min-[390px]:p-3 sm:p-5",
+      "id": "",
+      "left": -53.59,
+      "right": 128.81,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-[#F4F1EA]/84 sm:text-[0.68rem] sm:tracking-[0.22em]",
+      "id": "",
+      "left": -33.59,
+      "right": 108.81,
+      "tag": "P",
+      "width": 142.4
+    },
+    {
+      "className": "mt-1.5 max-w-[14ch] font-heading text-[0.98rem] font-semibold leading-tight min-[390px]:text-[1.06rem] sm:mt-2 sm:max-w-[16ch] sm:text-lg xl:text-xl 2xl:text-2xl",
+      "id": "",
+      "left": -33.59,
+      "right": 108.81,
+      "tag": "H3",
+      "width": 142.4
+    },
+    {
+      "className": "flex min-w-max gap-2 min-[390px]:gap-2.5",
+      "id": "",
+      "left": -448.22,
+      "right": 705.78,
+      "tag": "DIV",
+      "width": 1154
+    },
+    {
+      "className": "flex gap-2 min-[390px]:gap-2.5",
+      "id": "",
+      "left": -448.22,
+      "right": 123.78,
+      "tag": "DIV",
+      "width": 572
+    },
+    {
+      "className": "group relative w-full overflow-hidden rounded-[1.75rem] border border-[#D8D4CC] bg-white shadow-sm shadow-[#2C3E50]/8 aspect-[4/5] h-[90px] w-[142px] flex-none rounded-[0.95rem] !aspect-auto min-[360px]:h-[98px] min-[360px]:w-[150px] min-[390px]:h-[104px] min-[390px]:w-[168px] min-[430px]:h-[112px] min-[430px]:w-[184px]",
+      "id": "",
+      "left": -448.22,
+      "right": -264.22,
+      "tag": "ARTICLE",
+      "width": 184
+    },
+    {
+      "className": "object-cover transition duration-700 group-hover:scale-[1.03]",
+      "id": "",
+      "left": -447.42,
+      "right": -265.02,
+      "tag": "IMG",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.06),rgba(44,62,80,0.72))]",
+      "id": "",
+      "left": -447.42,
+      "right": -265.02,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-x-0 bottom-0 p-2.5 text-white min-[390px]:p-3 sm:p-5",
+      "id": "",
+      "left": -447.42,
+      "right": -265.02,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-[#F4F1EA]/84 sm:text-[0.68rem] sm:tracking-[0.22em]",
+      "id": "",
+      "left": -427.42,
+      "right": -285.02,
+      "tag": "P",
+      "width": 142.4
+    },
+    {
+      "className": "mt-1.5 max-w-[14ch] font-heading text-[0.98rem] font-semibold leading-tight min-[390px]:text-[1.06rem] sm:mt-2 sm:max-w-[16ch] sm:text-lg xl:text-xl 2xl:text-2xl",
+      "id": "",
+      "left": -427.42,
+      "right": -285.02,
+      "tag": "H3",
+      "width": 142.4
+    },
+    {
+      "className": "group relative w-full overflow-hidden rounded-[1.75rem] border border-[#D8D4CC] bg-white shadow-sm shadow-[#2C3E50]/8 aspect-[4/5] h-[90px] w-[142px] flex-none rounded-[0.95rem] !aspect-auto min-[360px]:h-[98px] min-[360px]:w-[150px] min-[390px]:h-[104px] min-[390px]:w-[168px] min-[430px]:h-[112px] min-[430px]:w-[184px]",
+      "id": "",
+      "left": -254.22,
+      "right": -70.22,
+      "tag": "ARTICLE",
+      "width": 184
+    },
+    {
+      "className": "object-cover transition duration-700 group-hover:scale-[1.03]",
+      "id": "",
+      "left": -253.42,
+      "right": -71.02,
+      "tag": "IMG",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.06),rgba(44,62,80,0.72))]",
+      "id": "",
+      "left": -253.42,
+      "right": -71.02,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-x-0 bottom-0 p-2.5 text-white min-[390px]:p-3 sm:p-5",
+      "id": "",
+      "left": -253.42,
+      "right": -71.02,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-[#F4F1EA]/84 sm:text-[0.68rem] sm:tracking-[0.22em]",
+      "id": "",
+      "left": -233.42,
+      "right": -91.02,
+      "tag": "P",
+      "width": 142.4
+    },
+    {
+      "className": "mt-1.5 max-w-[14ch] font-heading text-[0.98rem] font-semibold leading-tight min-[390px]:text-[1.06rem] sm:mt-2 sm:max-w-[16ch] sm:text-lg xl:text-xl 2xl:text-2xl",
+      "id": "",
+      "left": -233.42,
+      "right": -91.02,
+      "tag": "H3",
+      "width": 142.4
+    },
+    {
+      "className": "group relative w-full overflow-hidden rounded-[1.75rem] border border-[#D8D4CC] bg-white shadow-sm shadow-[#2C3E50]/8 aspect-[4/3] h-[90px] w-[142px] flex-none rounded-[0.95rem] !aspect-auto min-[360px]:h-[98px] min-[360px]:w-[150px] min-[390px]:h-[104px] min-[390px]:w-[168px] min-[430px]:h-[112px] min-[430px]:w-[184px]",
+      "id": "",
+      "left": -60.22,
+      "right": 123.78,
+      "tag": "ARTICLE",
+      "width": 184
+    },
+    {
+      "className": "object-cover transition duration-700 group-hover:scale-[1.03]",
+      "id": "",
+      "left": -59.42,
+      "right": 122.98,
+      "tag": "IMG",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.06),rgba(44,62,80,0.72))]",
+      "id": "",
+      "left": -59.42,
+      "right": 122.98,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "absolute inset-x-0 bottom-0 p-2.5 text-white min-[390px]:p-3 sm:p-5",
+      "id": "",
+      "left": -59.42,
+      "right": 122.98,
+      "tag": "DIV",
+      "width": 182.4
+    },
+    {
+      "className": "text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-[#F4F1EA]/84 sm:text-[0.68rem] sm:tracking-[0.22em]",
+      "id": "",
+      "left": -39.42,
+      "right": 102.98,
+      "tag": "P",
+      "width": 142.4
+    },
+    {
+      "className": "mt-1.5 max-w-[14ch] font-heading text-[0.98rem] font-semibold leading-tight min-[390px]:text-[1.06rem] sm:mt-2 sm:max-w-[16ch] sm:text-lg xl:text-xl 2xl:text-2xl",
+      "id": "",
+      "left": -39.42,
+      "right": 102.98,
+      "tag": "H3",
+      "width": 142.4
+    }
+  ],
+  "scrollWidth": 2669
+}

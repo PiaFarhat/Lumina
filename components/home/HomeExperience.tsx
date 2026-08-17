@@ -8,6 +8,7 @@ import { Footer } from "../layout/Footer";
 import { FloatingHeader, MobileBottomAction } from "../navigation/FloatingHeader";
 import { HeroSection } from "./HeroSection";
 import { EditorialShowcase } from "../sections/EditorialShowcase";
+import { LuminaJourney } from "../sections/LuminaJourney";
 import { LuminaStandard } from "../sections/LuminaStandard";
 import {
   AnnouncementsSection,
@@ -44,12 +45,13 @@ export function HomeExperience({
 
   return (
     <AuthGuard>
-      <div className="min-h-screen overflow-x-hidden bg-[#F4F1EA] pb-28 text-[#2C3E50] md:pb-0">
+      <div className="min-h-dvh bg-[#F4F1EA] pb-24 text-[#2C3E50] md:pb-0">
         <FloatingHeader onRequest={openRequest} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
         <main>
           <HeroSection onRequest={openRequest} />
           <CommunityOverview />
           <EditorialShowcase />
+          <LuminaJourney />
           <LuminaStandard />
           <QuickServices onRequest={openRequest} />
           <AnnouncementsSection />
