@@ -52,10 +52,10 @@ const requestStatusFilters: Array<"All" | MaintenanceStatus> = [
 export function CommunityOverview() {
   return (
     <section id="overview" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full max-w-[min(96vw,var(--lumina-page-max))]">
         <SectionHeading eyebrow="Community Overview" title="A composed view of everything moving through Lumina." description="Metrics are arranged for scanning, not boxed into a generic dashboard." />
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-12">
-          <motion.article variants={fadeUp} className="relative min-h-[19rem] overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-white shadow-sm sm:min-h-[21rem] lg:col-span-7 lg:row-span-2">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-8 grid min-w-0 gap-5 sm:mt-10 md:grid-cols-2 md:items-stretch lg:grid-cols-12">
+          <motion.article variants={fadeUp} className="relative min-h-[19rem] overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-white shadow-sm sm:min-h-[21rem] md:col-span-2 lg:col-span-7 lg:row-span-2">
             <Image
               src={images.reception}
               alt="Lumina entrance gate with illuminated signage and landscaped arrival drive"
@@ -73,14 +73,16 @@ export function CommunityOverview() {
           {metrics.map((metric) => {
             const Icon = metric.icon;
             return (
-              <motion.article key={metric.label} variants={fadeUp} className="rounded-[2rem] border border-[#D8D4CC] bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#2C3E50]/8 lg:col-span-5">
+              <motion.article key={metric.label} variants={fadeUp} className="h-full rounded-[2rem] border border-[#D8D4CC] bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#2C3E50]/8 lg:col-span-5">
                 <div className="flex items-center justify-between">
                   <Icon className="h-5 w-5 text-[#8FA89B]" aria-hidden />
                   <span className="text-xs uppercase tracking-[0.2em] text-[#7A92A3]">Live</span>
                 </div>
-                <p className="mt-8 font-heading text-4xl font-semibold text-[#2C3E50] sm:text-5xl">{metric.value}</p>
-                <h3 className="mt-4 text-lg font-semibold text-[#2C3E50]">{metric.label}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#6E6E6E]">{metric.detail}</p>
+                <div className="flex h-full min-h-0 flex-col">
+                  <p className="mt-8 font-heading text-4xl font-semibold text-[#2C3E50] sm:text-5xl">{metric.value}</p>
+                  <h3 className="mt-4 text-lg font-semibold text-[#2C3E50]">{metric.label}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[#6E6E6E]">{metric.detail}</p>
+                </div>
               </motion.article>
             );
           })}
@@ -93,10 +95,10 @@ export function CommunityOverview() {
 export function QuickServices({ onRequest }: HomeSectionsProps) {
   return (
     <section id="services" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full max-w-[min(96vw,var(--lumina-page-max))]">
         <SectionHeading eyebrow="Quick Services" title="Resident requests with hospitality-level clarity." />
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-8 grid gap-5 sm:mt-10 md:grid-cols-2 xl:grid-cols-4">
-          {services.map((service) => {
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-8 grid min-w-0 gap-5 sm:mt-10 md:grid-cols-2 md:items-stretch xl:grid-cols-4">
+          {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <motion.button
@@ -106,17 +108,21 @@ export function QuickServices({ onRequest }: HomeSectionsProps) {
                 whileHover={{ y: -7 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onRequest(service.title === "Maintenance" ? "maintenance" : service.title === "Concierge" ? "concierge" : service.title === "Parking" ? "parking" : "contact")}
-                className="group rounded-[1.75rem] border border-[#D8D4CC] bg-white p-7 text-left shadow-sm transition hover:border-[#8FA89B] hover:shadow-xl hover:shadow-[#2C3E50]/8 focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20 md:rounded-[2rem]"
+                className={`group h-full rounded-[1.75rem] border border-[#D8D4CC] bg-white p-7 text-left shadow-sm transition hover:border-[#8FA89B] hover:shadow-xl hover:shadow-[#2C3E50]/8 focus:outline-none focus:ring-4 focus:ring-[#8FA89B]/20 md:rounded-[2rem] ${
+                  services.length % 2 !== 0 && index === services.length - 1 ? "md:col-span-2" : ""
+                }`}
               >
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#F4F1EA] text-[#2C3E50]">
-                  <Icon className="h-7 w-7 origin-center transition duration-200 group-hover:scale-110 group-hover:text-[#789285]" aria-hidden />
-                </span>
-                <h3 className="mt-6 font-heading text-2xl font-semibold text-[#2C3E50] md:mt-10">{service.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#6E6E6E] md:mt-4 md:min-h-20">{service.description}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#789285]">
-                  {service.action}
-                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
-                </span>
+                <div className="flex h-full min-h-0 flex-col">
+                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#F4F1EA] text-[#2C3E50]">
+                    <Icon className="h-7 w-7 origin-center transition duration-200 group-hover:scale-110 group-hover:text-[#789285]" aria-hidden />
+                  </span>
+                  <h3 className="mt-6 font-heading text-2xl font-semibold text-[#2C3E50] md:mt-8">{service.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-[#6E6E6E] md:mt-4 md:flex-1 md:min-h-0">{service.description}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#789285]">
+                    {service.action}
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+                  </span>
+                </div>
               </motion.button>
             );
           })}

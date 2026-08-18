@@ -61,39 +61,6 @@ const columnTwoCards: ShowcaseCardItem[] = [
   },
 ];
 
-const mobileCards = [
-  {
-    ...columnOneCards[0],
-    title: "Private Living",
-    gridClassName: "col-span-3 row-span-1",
-  },
-  {
-    ...columnTwoCards[0],
-    title: "Concierge",
-    gridClassName: "col-span-3 row-span-1",
-  },
-  {
-    ...columnTwoCards[1],
-    title: "Visitor Parking",
-    gridClassName: "col-span-2 row-span-1",
-  },
-  {
-    ...columnOneCards[1],
-    title: "Wellness & Pool",
-    gridClassName: "col-span-4 row-span-1",
-  },
-  {
-    ...columnOneCards[2],
-    title: "Community Events",
-    gridClassName: "col-span-3 row-span-1",
-  },
-  {
-    ...columnTwoCards[2],
-    title: "Arrival",
-    gridClassName: "col-span-3 row-span-1",
-  },
-] as const;
-
 const mobileRowOneCards = [
   {
     ...columnOneCards[0],
@@ -259,17 +226,17 @@ export function EditorialShowcase() {
   const reduceMotion = !!useReducedMotion();
 
   return (
-    <section className="lumina-editorial relative overflow-x-hidden bg-[#F8F5EE] px-[14px] py-12 sm:px-4 sm:py-14 lg:py-18 xl:py-20">
+    <section className="lumina-editorial relative overflow-x-clip bg-[#F8F5EE] py-12 sm:py-14 lg:py-18 xl:py-20">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
         <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(248,245,238,0.96),rgba(248,245,238,0))] lg:h-32" />
         <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(0deg,rgba(248,245,238,0.98),rgba(248,245,238,0))] lg:h-36" />
-        <div className="absolute inset-x-[10%] bottom-[6%] top-[50%] hidden lg:block">
+        <div className="absolute inset-x-0 bottom-[6%] top-[50%] hidden lg:block">
           <div className="absolute inset-0 rounded-tl-[12rem] rounded-tr-[4rem] bg-[#B4C2C9]/42 [clip-path:polygon(0_60%,10%_48%,22%_40%,38%_34%,56%_26%,74%_18%,90%_10%,100%_6%,100%_100%,0_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,245,238,0.02)_0%,rgba(220,229,232,0.34)_22%,rgba(180,194,201,0.46)_54%,rgba(143,168,155,0.16)_76%,rgba(248,245,238,0.1)_100%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(248,245,238,0.14),transparent_28%),radial-gradient(circle_at_72%_42%,rgba(122,146,163,0.1),transparent_32%),radial-gradient(circle_at_82%_76%,rgba(143,168,155,0.1),transparent_24%)]" />
           <div className="absolute inset-x-0 bottom-[-2%] h-[32%] bg-[linear-gradient(180deg,rgba(180,194,201,0),rgba(248,245,238,0.64)_68%,rgba(248,245,238,0.96)_100%)]" />
         </div>
-        <div className="absolute inset-x-[45%] bottom-0 top-[56%] hidden md:block lg:hidden">
+        <div className="absolute inset-x-[34%] bottom-0 top-[58%] hidden md:block lg:hidden">
           <div className="absolute inset-0 rounded-tl-[6rem] bg-[#DCE5E8]/34 [clip-path:polygon(0_58%,24%_42%,54%_28%,100%_14%,100%_100%,0_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(220,229,232,0.46),rgba(248,245,238,0.08)_66%,rgba(248,245,238,0)_100%)]" />
         </div>
@@ -279,42 +246,49 @@ export function EditorialShowcase() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[min(96vw,1800px)]">
-        <div className="grid gap-10 lg:grid-cols-[0.46fr_0.54fr] lg:items-start lg:gap-10 xl:gap-12 2xl:gap-14">
+      <div className="relative z-10 mx-auto w-full max-w-[1700px] px-[14px] sm:px-5 lg:px-8 xl:px-10">
+        <div className="grid gap-10 md:gap-8 lg:grid-cols-[0.46fr_0.54fr] lg:items-start lg:gap-10 xl:gap-12 2xl:gap-14">
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
-            className="max-w-[820px]"
+            className="max-w-[760px] md:max-w-[720px] md:pt-1 lg:max-w-[820px] lg:pt-2"
           >
             <motion.p variants={fadeUp} className="text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-[#8FA89B] min-[390px]:text-[0.7rem] sm:text-xs sm:tracking-[0.26em]">
               Life at Lumina
             </motion.p>
             <motion.h2
               variants={fadeUp}
-              className="mt-2.5 max-w-[11ch] font-heading text-[1.9rem] font-semibold leading-[1.06] tracking-normal text-[#2C3E50] min-[390px]:text-[2rem] sm:mt-4 sm:text-4xl lg:max-w-[14ch] lg:text-[3.35rem] lg:leading-[1.04]"
+              className="mt-2.5 max-w-[11ch] font-heading text-[1.9rem] font-semibold leading-[1.06] tracking-normal text-[#2C3E50] min-[390px]:text-[2rem] sm:mt-4 sm:text-4xl md:max-w-[13ch] md:text-[clamp(2.65rem,5.3vw,3.25rem)] md:leading-[1.04] lg:max-w-[14ch] lg:text-[3.35rem] lg:leading-[1.04]"
             >
               Designed around the way you live.
             </motion.h2>
-            <motion.p variants={fadeUp} className="mt-4 max-w-[40rem] text-[0.92rem] leading-[1.55] text-[#6E6E6E] min-[390px]:text-[0.96rem] sm:mt-5 sm:text-lg sm:leading-8">
+            <motion.p variants={fadeUp} className="mt-4 max-w-[40rem] text-[0.92rem] leading-[1.55] text-[#6E6E6E] min-[390px]:text-[0.96rem] sm:mt-5 sm:text-lg sm:leading-8 md:max-w-[44rem]">
               Private living, thoughtful services, wellness and community &mdash; connected in one
               considered environment.
             </motion.p>
-            <motion.div
-              variants={fadeUp}
-              className="mt-5 max-w-[34rem] rounded-[1.35rem] border border-[#D8D4CC] bg-[#F4F1EA] p-4 shadow-sm sm:mt-8 sm:rounded-[1.75rem] sm:p-6"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7A92A3]">Highlight</p>
-              <p className="mt-2 font-heading text-[1.45rem] font-semibold text-[#2C3E50] min-[390px]:text-[1.55rem] sm:mt-3 sm:text-4xl">
-                24/7 Resident Services
-              </p>
-              <p className="mt-2 max-w-md text-[0.82rem] leading-[1.55] text-[#6E6E6E] sm:mt-3 sm:text-sm sm:leading-7">
-                Concierge support, guest access, and villa requests remain composed in one resident
-                flow.
-              </p>
+            <motion.div variants={fadeUp} className="mt-5 md:mt-7 lg:mt-8">
+              <div className="flex flex-col gap-4 md:max-w-[760px] md:flex-row md:items-end md:justify-between md:gap-5 lg:block">
+                <div className="max-w-[34rem] rounded-[1.35rem] border border-[#D8D4CC] bg-[#F4F1EA] p-4 shadow-sm sm:rounded-[1.75rem] sm:p-6 md:max-w-[36rem] md:rounded-[1.5rem] md:px-6 md:py-5 lg:max-w-[34rem] lg:rounded-[1.75rem] lg:p-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7A92A3]">Highlight</p>
+                  <p className="mt-2 font-heading text-[1.45rem] font-semibold text-[#2C3E50] min-[390px]:text-[1.55rem] sm:mt-3 sm:text-4xl md:text-[clamp(1.8rem,3.7vw,2.15rem)] md:leading-[1.08] lg:text-4xl">
+                    24/7 Resident Services
+                  </p>
+                  <p className="mt-2 max-w-md text-[0.82rem] leading-[1.55] text-[#6E6E6E] sm:mt-3 sm:text-sm sm:leading-7 md:text-[0.95rem] md:leading-6 lg:text-sm lg:leading-7">
+                    Concierge support, guest access, and villa requests remain composed in one resident
+                    flow.
+                  </p>
+                </div>
+                <div className="hidden md:flex md:shrink-0 md:pb-1 lg:hidden">
+                  <a href="#services" className="btn-secondary inline-flex items-center gap-2 whitespace-nowrap">
+                    Explore the community
+                    <ArrowRight className="h-4 w-4" aria-hidden />
+                  </a>
+                </div>
+              </div>
             </motion.div>
-            <motion.div variants={fadeUp} className="mt-8 hidden md:block">
+            <motion.div variants={fadeUp} className="mt-8 hidden lg:block">
               <a href="#services" className="btn-secondary inline-flex items-center gap-2">
                 Explore the community
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -348,14 +322,27 @@ export function EditorialShowcase() {
           </div>
 
           <div className="hidden min-w-0 md:block lg:hidden">
-            <div className="grid gap-4 md:grid-cols-2">
-              {mobileCards.map((card, index) => (
-                <ShowcaseCard
-                  key={card.title}
-                  card={card}
-                  className={index === 0 || index === 5 ? "md:col-span-2" : ""}
+            <div className="relative h-[clamp(420px,46vw,500px)] w-full overflow-hidden rounded-[1.75rem]">
+              <div className="grid h-full grid-cols-2 gap-4">
+                <MediaColumn
+                  cards={columnOneCards}
+                  direction="up"
+                  duration={20}
+                  reduceMotion={reduceMotion}
+                  cardClassName="!aspect-auto h-[clamp(170px,22vw,240px)] rounded-[1.35rem]"
+                  className="w-full pt-2"
                 />
-              ))}
+                <MediaColumn
+                  cards={columnTwoCards}
+                  direction="down"
+                  duration={24}
+                  reduceMotion={reduceMotion}
+                  cardClassName="!aspect-auto h-[clamp(170px,22vw,240px)] rounded-[1.35rem]"
+                  className="w-full pt-10"
+                />
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-8 bg-[linear-gradient(180deg,rgba(248,245,238,0.84),rgba(248,245,238,0))]" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-[linear-gradient(0deg,rgba(248,245,238,0.88),rgba(248,245,238,0.08)_62%,rgba(248,245,238,0))]" />
             </div>
           </div>
 

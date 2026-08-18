@@ -90,13 +90,14 @@ const milestones: JourneyMilestone[] = [
 ];
 
 export function LuminaJourney() {
+  const MIN_PROGRESS_WIDTH = 12;
   const reduceMotion = !!useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const [previousIndex, setPreviousIndex] = useState(0);
-  const [progress, setProgress] = useState({ left: 0, width: 0 });
+  const [trackBounds, setTrackBounds] = useState({ left: 0, width: 0 });
+  const [progress, setProgress] = useState({ left: 0, width: MIN_PROGRESS_WIDTH });
   const railViewportRef = useRef<HTMLDivElement | null>(null);
   const yearRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const markerRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const lineRef = useRef<HTMLDivElement | null>(null);
 
   const activeMilestone = milestones[activeIndex];
@@ -121,22 +122,30 @@ export function LuminaJourney() {
   useEffect(() => {
     function updateProgress() {
       const lineElement = lineRef.current;
-      const firstMarker = markerRefs.current[0];
-      const activeMarker = markerRefs.current[activeIndex];
+      const firstItem = yearRefs.current[0];
+      const activeItem = yearRefs.current[activeIndex];
+      const lastItem = yearRefs.current[milestones.length - 1];
 
-      if (!lineElement || !firstMarker || !activeMarker) {
+      if (!lineElement || !firstItem || !activeItem || !lastItem) {
         return;
       }
 
       const lineRect = lineElement.getBoundingClientRect();
-      const firstRect = firstMarker.getBoundingClientRect();
-      const activeRect = activeMarker.getBoundingClientRect();
+      const firstRect = firstItem.getBoundingClientRect();
+      const activeRect = activeItem.getBoundingClientRect();
+      const lastRect = lastItem.getBoundingClientRect();
       const firstCenter = firstRect.left + firstRect.width / 2 - lineRect.left;
       const activeCenter = activeRect.left + activeRect.width / 2 - lineRect.left;
+      const lastCenter = lastRect.left + lastRect.width / 2 - lineRect.left;
+      const trackWidth = Math.max(lastCenter - firstCenter, 0);
 
+      setTrackBounds({
+        left: firstCenter,
+        width: trackWidth,
+      });
       setProgress({
         left: firstCenter,
-        width: Math.max(activeCenter - firstCenter, 0),
+        width: Math.max(activeCenter - firstCenter, MIN_PROGRESS_WIDTH),
       });
     }
 
@@ -236,19 +245,25 @@ export function LuminaJourney() {
           >
             <div
               ref={lineRef}
-              className="relative block w-max min-w-full pb-7 sm:pb-8"
+              className="relative block w-max min-w-full pb-1"
             >
-              <div className="pointer-events-none absolute bottom-[0.44rem] left-0 right-0 h-px bg-[var(--border)]" />
               <motion.div
-                className="pointer-events-none absolute bottom-[0.4rem] h-[2px] rounded-full bg-[var(--muted-strong)]"
+                className="pointer-events-none absolute bottom-0 h-px bg-[var(--border)]"
+                initial={false}
+                animate={{ left: trackBounds.left, width: trackBounds.width }}
+                transition={{ duration: reduceMotion ? 0 : 0.45, ease: easeOut }}
+              />
+              <motion.div
+                className="pointer-events-none absolute bottom-0 h-[2px] rounded-full bg-[var(--muted-strong)]"
                 initial={false}
                 animate={{ left: progress.left, width: progress.width }}
                 transition={{ duration: reduceMotion ? 0 : 0.45, ease: easeOut }}
               />
 
-              <div className="grid auto-cols-[118px] grid-flow-col gap-4 px-4 sm:auto-cols-[124px] sm:gap-5 sm:px-5 md:auto-cols-[128px] md:px-6 lg:auto-cols-[minmax(136px,1fr)] lg:gap-7 lg:px-0 xl:auto-cols-[minmax(146px,1fr)] 2xl:auto-cols-[minmax(154px,1fr)]">
+              <div className="grid auto-cols-[148px] grid-flow-col gap-4 px-4 sm:auto-cols-[164px] sm:gap-5 sm:px-5 md:auto-cols-[174px] md:gap-6 md:px-6 lg:auto-cols-[minmax(136px,1fr)] lg:gap-7 lg:px-0 xl:auto-cols-[minmax(146px,1fr)] 2xl:auto-cols-[minmax(154px,1fr)]">
                 {milestones.map((item, index) => {
                   const isActive = index === activeIndex;
+                  const isCompleted = index < activeIndex;
 
                   return (
                     <button
@@ -259,13 +274,15 @@ export function LuminaJourney() {
                       type="button"
                       onClick={() => goToIndex(index)}
                       aria-current={isActive ? "step" : undefined}
-                      className="group relative min-w-0 rounded-xl pb-7 text-left outline-none focus-visible:ring-4 focus-visible:ring-[#8FA89B]/20"
+                      className="group relative min-w-0 rounded-xl pb-5 pt-0 text-left outline-none focus-visible:ring-4 focus-visible:ring-[#8FA89B]/20"
                     >
                       <p
                         className={`font-heading text-[0.98rem] font-semibold leading-none transition duration-300 sm:text-[1.03rem] ${
                           isActive
-                            ? "-translate-y-0.5 text-[var(--foreground)]"
-                            : "text-[color:color-mix(in_srgb,var(--muted-strong)_78%,transparent)] group-hover:text-[var(--foreground)]"
+                            ? "-translate-y-0.5 font-semibold text-[var(--foreground)]"
+                            : isCompleted
+                              ? "text-[var(--muted-strong)] group-hover:text-[var(--foreground)]"
+                              : "text-[color:color-mix(in_srgb,var(--muted-strong)_48%,transparent)] group-hover:text-[var(--foreground)]"
                         }`}
                       >
                         {item.year}
@@ -273,25 +290,33 @@ export function LuminaJourney() {
                       <p
                         className={`mt-2 text-[0.68rem] font-medium uppercase tracking-[0.16em] transition duration-300 sm:text-[0.72rem] ${
                           isActive
-                            ? "text-[var(--accent-strong)]"
-                            : "text-[color:color-mix(in_srgb,var(--muted-strong)_70%,transparent)] group-hover:text-[var(--muted-strong)]"
+                            ? "font-semibold text-[var(--accent-strong)]"
+                            : isCompleted
+                              ? "text-[var(--muted-strong)] group-hover:text-[var(--accent-strong)]"
+                              : "text-[color:color-mix(in_srgb,var(--muted-strong)_44%,transparent)] group-hover:text-[var(--muted-strong)]"
                         }`}
                       >
-                        {item.label}
+                        {item.category}
                       </p>
-                      <span className="absolute bottom-0 left-0 flex w-full justify-center">
-                        <span
-                          ref={(element) => {
-                            markerRefs.current[index] = element;
-                          }}
-                          className={`relative block rounded-full border transition duration-300 ${
-                            isActive
-                              ? "h-[10px] w-[10px] border-[var(--muted-strong)] bg-[var(--muted-strong)] shadow-[0_0_0_4px_rgba(122,146,163,0.16)]"
-                              : "h-[6px] w-[6px] border-[var(--border)] bg-[var(--border)] group-hover:h-[7px] group-hover:w-[7px] group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)]"
-                          }`}
-                        />
-                      </span>
-                      <span className="sr-only">{item.category}</span>
+                      <div className="mt-3 min-h-[2.9rem] pr-2">
+                        <AnimatePresence initial={false} mode="wait">
+                          {isActive ? (
+                            <motion.p
+                              key={`${item.year}-detail`}
+                              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 6 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -4 }}
+                              transition={{ duration: reduceMotion ? 0.16 : 0.32, ease: easeOut }}
+                              className="max-w-[17ch] text-[0.72rem] leading-5 text-[var(--muted)] sm:text-[0.76rem]"
+                            >
+                              {item.title}
+                            </motion.p>
+                          ) : (
+                            <span key={`${item.year}-spacer`} className="block h-[2.9rem]" aria-hidden />
+                          )}
+                        </AnimatePresence>
+                      </div>
+                      <span className="sr-only">{item.label}</span>
                     </button>
                   );
                 })}

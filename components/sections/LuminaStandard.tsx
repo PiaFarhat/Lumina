@@ -801,7 +801,7 @@ export function LuminaStandard() {
   return (
     <section
       id="lumina-standard"
-      className="lumina-standard-section relative overflow-hidden bg-[#F8F5EE] px-4 pb-14 pt-[calc(var(--lumina-header-safe-offset)+0.5rem)] scroll-mt-[var(--lumina-header-safe-offset)] sm:pb-16 sm:pt-[calc(var(--lumina-header-safe-offset)+0.75rem)] lg:pb-18 lg:pt-[calc(var(--lumina-header-safe-offset)+0.25rem)]"
+      className="lumina-standard-section relative overflow-hidden bg-[#F8F5EE] px-4 pb-14 pt-[calc(var(--lumina-header-safe-offset)+1rem)] scroll-mt-[var(--lumina-header-safe-offset)] sm:pb-16 sm:pt-[calc(var(--lumina-header-safe-offset)+1.25rem)] md:pt-[calc(var(--lumina-header-safe-offset)+0.75rem)] lg:pb-18 lg:pt-[calc(var(--lumina-header-safe-offset)+0.25rem)]"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_14%,rgba(122,146,163,0.12),transparent_24%),radial-gradient(circle_at_20%_84%,rgba(143,168,155,0.08),transparent_22%)]" />
@@ -809,18 +809,18 @@ export function LuminaStandard() {
       </div>
 
       <div className="relative mx-auto w-full max-w-[min(96vw,var(--lumina-page-max))]">
-        <div className="mb-4 max-w-[52rem] md:mb-5 lg:mb-6 xl:max-w-[56rem]">
+        <div className="mb-4 max-w-[52rem] md:mb-5 md:max-w-[46rem] lg:mb-6 xl:max-w-[56rem]">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[#8FA89B] sm:text-xs">
             THE LUMINA STANDARD
           </p>
-          <h2 className="mt-3 max-w-[15ch] font-heading font-semibold leading-[1.02] text-[#2C3E50] text-[clamp(2.5rem,4vw,4.25rem)] lg:max-w-[13ch]">
+          <h2 className="mt-3 max-w-[15ch] font-heading font-semibold leading-[1.02] text-[#2C3E50] text-[clamp(2.5rem,4vw,4.25rem)] md:max-w-[18ch] lg:max-w-[13ch]">
             What the community is designed to support.
           </h2>
         </div>
 
         <div
           ref={stageRef}
-          className="lumina-standard-stage relative mx-auto h-[clamp(500px,78vw,660px)] max-w-[430px] min-w-0 overflow-hidden pr-0 sm:h-[clamp(540px,74vw,700px)] sm:max-w-[520px] md:h-[clamp(560px,66vw,700px)] md:max-w-none md:pr-10 lg:h-[clamp(500px,48vw,640px)] lg:pr-12 xl:h-[clamp(540px,44vw,680px)]"
+          className="lumina-standard-stage relative mx-auto h-[clamp(500px,78vw,660px)] max-w-[430px] min-w-0 overflow-hidden pr-0 sm:h-[clamp(540px,74vw,700px)] sm:max-w-[520px] md:h-[clamp(520px,58vw,620px)] md:max-w-none md:pr-6 lg:h-[clamp(500px,48vw,640px)] lg:pr-12 xl:h-[clamp(540px,44vw,680px)]"
         >
           <Swiper
             modules={[A11y]}
@@ -855,7 +855,7 @@ export function LuminaStandard() {
 
               return (
                 <SwiperSlide key={slide.title} className="!h-full">
-                  <div className="grid h-full min-h-0 min-w-0 grid-cols-1 grid-rows-[auto_minmax(0,1fr)] gap-3 px-1 py-3 sm:grid-rows-[auto_minmax(0,1fr)] sm:gap-4 sm:px-2 sm:py-4 md:grid-cols-[minmax(0,0.48fr)_minmax(0,0.52fr)] md:grid-rows-1 md:items-center md:gap-6 md:px-2 md:py-3 lg:grid-cols-[minmax(0,0.5fr)_minmax(0,0.5fr)] lg:gap-7 lg:px-3 lg:py-4 xl:grid-cols-[minmax(0,0.52fr)_minmax(0,0.48fr)] xl:gap-8 xl:px-4 xl:py-5">
+                  <div className="grid h-full min-h-0 min-w-0 grid-cols-1 grid-rows-[auto_minmax(0,1fr)] gap-3 px-1 py-3 sm:grid-rows-[auto_minmax(0,1fr)] sm:gap-4 sm:px-2 sm:py-4 md:grid-cols-[minmax(0,0.58fr)_minmax(0,0.42fr)] md:grid-rows-1 md:items-center md:gap-5 md:px-2 md:py-3 lg:grid-cols-[minmax(0,0.5fr)_minmax(0,0.5fr)] lg:gap-7 lg:px-3 lg:py-4 xl:grid-cols-[minmax(0,0.52fr)_minmax(0,0.48fr)] xl:gap-8 xl:px-4 xl:py-5">
                     <SlideCopy slide={slide} active={active} reduceMotion={reduceMotion} />
                     <SlideVisual
                       index={index}
