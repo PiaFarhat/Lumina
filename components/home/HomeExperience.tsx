@@ -10,6 +10,7 @@ import { HeroSection } from "./HeroSection";
 import { EditorialShowcase } from "../sections/EditorialShowcase";
 import { LuminaJourney } from "../sections/LuminaJourney";
 import { LuminaStandard } from "../sections/LuminaStandard";
+import { LuminaValues } from "../sections/LuminaValues";
 import {
   AnnouncementsSection,
   CommunityOverview,
@@ -51,8 +52,9 @@ export function HomeExperience({
           <HeroSection onRequest={openRequest} />
           <CommunityOverview />
           <EditorialShowcase />
-          <LuminaJourney />
           <LuminaStandard />
+          <LuminaValues />
+          <LuminaJourney />
           <QuickServices onRequest={openRequest} />
           <AnnouncementsSection />
           <RequestStatus requests={maintenanceRequests} source={maintenanceSource} />

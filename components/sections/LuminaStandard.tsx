@@ -808,7 +808,7 @@ export function LuminaStandard() {
         <div className="absolute bottom-0 right-0 h-[48%] w-[62%] rounded-tl-[8rem] bg-[linear-gradient(180deg,rgba(220,229,232,0.12),rgba(220,229,232,0.28))]" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-[min(96vw,var(--lumina-page-max))]">
+      <div className="lumina-page-shell relative">
         <div className="mb-4 max-w-[52rem] md:mb-5 md:max-w-[46rem] lg:mb-6 xl:max-w-[56rem]">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[#8FA89B] sm:text-xs">
             THE LUMINA STANDARD

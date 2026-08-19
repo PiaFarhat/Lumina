@@ -70,6 +70,13 @@ html {
   scroll-padding-top: var(--lumina-header-safe-offset);
 }
 
+.lumina-page-shell {
+  width: 100%;
+  max-width: var(--lumina-page-max);
+  margin-inline: auto;
+  padding-inline: var(--lumina-page-x);
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --background: #101922;

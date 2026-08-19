@@ -51,8 +51,8 @@ const requestStatusFilters: Array<"All" | MaintenanceStatus> = [
 
 export function CommunityOverview() {
   return (
-    <section id="overview" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-      <div className="mx-auto w-full max-w-[min(96vw,var(--lumina-page-max))]">
+    <section id="overview" className="py-14 sm:py-16 lg:py-18 xl:py-20">
+      <div className="lumina-page-shell">
         <SectionHeading eyebrow="Community Overview" title="A composed view of everything moving through Lumina." description="Metrics are arranged for scanning, not boxed into a generic dashboard." />
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-8 grid min-w-0 gap-5 sm:mt-10 md:grid-cols-2 md:items-stretch lg:grid-cols-12">
           <motion.article variants={fadeUp} className="relative min-h-[19rem] overflow-hidden rounded-[2rem] border border-[#D8D4CC] bg-white shadow-sm sm:min-h-[21rem] md:col-span-2 lg:col-span-7 lg:row-span-2">
@@ -94,8 +94,8 @@ export function CommunityOverview() {
 
 export function QuickServices({ onRequest }: HomeSectionsProps) {
   return (
-    <section id="services" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-      <div className="mx-auto w-full max-w-[min(96vw,var(--lumina-page-max))]">
+    <section id="services" className="py-14 sm:py-16 lg:py-18 xl:py-20">
+      <div className="lumina-page-shell">
         <SectionHeading eyebrow="Quick Services" title="Resident requests with hospitality-level clarity." />
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-8 grid min-w-0 gap-5 sm:mt-10 md:grid-cols-2 md:items-stretch xl:grid-cols-4">
           {services.map((service, index) => {
@@ -168,8 +168,8 @@ export function AnnouncementsSection() {
   const featuredAnnouncement = filtered[0];
 
   return (
-    <section id="announcements" className="relative isolate bg-white px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-      <div className="mx-auto max-w-7xl">
+    <section id="announcements" className="relative isolate bg-white py-14 sm:py-16 lg:py-18 xl:py-20">
+      <div className="lumina-page-shell">
         <div className="grid gap-8 lg:grid-cols-[1fr_380px] lg:items-end">
           <SectionHeading eyebrow="Announcements" title="Notices that feel considered, not broadcast." />
           <SearchBar value={query} onChange={setQuery} placeholder="Search updates" />
@@ -289,8 +289,8 @@ export function RequestStatus({ requests, source }: RequestStatusProps) {
   );
 
   return (
-    <section className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-      <div className="mx-auto max-w-7xl">
+    <section className="py-14 sm:py-16 lg:py-18 xl:py-20">
+      <div className="lumina-page-shell">
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <SectionHeading eyebrow="Request Status" title="A quiet timeline for active work." />
           <p className="text-sm text-[#6E6E6E]">
@@ -376,8 +376,8 @@ export function RequestStatus({ requests, source }: RequestStatusProps) {
 
 export function ConciergeSection({ onRequest }: HomeSectionsProps) {
   return (
-    <section className="bg-[#2C3E50] px-4 py-14 sm:py-16 lg:py-18 xl:py-20 text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+    <section className="bg-[#2C3E50] py-14 sm:py-16 lg:py-18 xl:py-20 text-white">
+      <div className="lumina-page-shell grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#C8A97E]">Concierge</p>
           <h2 className="mt-4 font-heading text-3xl font-semibold sm:text-4xl lg:text-5xl">Hospitality built into daily residence.</h2>
@@ -417,8 +417,8 @@ export function ParkingSection({ onRequest }: HomeSectionsProps) {
   const reserved = spaces.length - available;
 
   return (
-    <section id="parking" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+    <section id="parking" className="py-14 sm:py-16 lg:py-18 xl:py-20">
+      <div className="lumina-page-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <SectionHeading eyebrow="Parking" title="Visitor arrival, visually managed." description="Availability, reserved bays, and occupancy are readable at a glance." />
           <div className="mt-9 grid gap-4 sm:grid-cols-3">
@@ -470,8 +470,8 @@ export function ParkingSection({ onRequest }: HomeSectionsProps) {
 
 export function EventsSection() {
   return (
-    <section className="bg-white px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-      <div className="mx-auto max-w-7xl">
+    <section className="bg-white py-14 sm:py-16 lg:py-18 xl:py-20">
+      <div className="lumina-page-shell">
         <div className="flex items-end justify-between gap-6">
           <SectionHeading eyebrow="Community Events" title="The rhythm of the compound." />
           <div className="hidden gap-2 sm:flex">
@@ -617,8 +617,8 @@ export function ResidentsGalleryContact({ onRequest, galleryAlbums, gallerySourc
 
   return (
     <>
-      <section id="residents" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-        <div className="mx-auto max-w-7xl">
+      <section id="residents" className="py-14 sm:py-16 lg:py-18 xl:py-20">
+        <div className="lumina-page-shell">
           <SectionHeading eyebrow="Residents" title="A private preview of the people who shape Lumina." />
           {residentsError ? <p className="mt-6 rounded-2xl border border-[#D8D4CC] bg-white px-4 py-3 text-sm text-[#6E6E6E]">{residentsError}</p> : null}
           <div className="mt-12 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
@@ -654,8 +654,8 @@ export function ResidentsGalleryContact({ onRequest, galleryAlbums, gallerySourc
           </div>
         </div>
       </section>
-      <section id="gallery" className="bg-white px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-        <div className="mx-auto max-w-7xl">
+      <section id="gallery" className="bg-white py-14 sm:py-16 lg:py-18 xl:py-20">
+        <div className="lumina-page-shell">
           <SectionHeading eyebrow="Gallery" title="Architectural moments across the community." />
           {gallerySource === "fallback" ? (
             <p className="mt-6 rounded-2xl border border-[#D8D4CC] bg-[#F4F1EA] px-4 py-3 text-sm text-[#6E6E6E]">
@@ -695,8 +695,8 @@ export function ResidentsGalleryContact({ onRequest, galleryAlbums, gallerySourc
           )}
         </div>
       </section>
-      <section id="contact" className="px-4 py-14 sm:py-16 lg:py-18 xl:py-20">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+      <section id="contact" className="py-14 sm:py-16 lg:py-18 xl:py-20">
+        <div className="lumina-page-shell grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading eyebrow="Contact" title="Clear lines for office, security, and urgent needs." />
           <div className="rounded-[2rem] border border-[#D8D4CC] bg-white p-6">
             <div className="relative mb-5 h-60 overflow-hidden rounded-[1.5rem] sm:h-72">

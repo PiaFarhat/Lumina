@@ -246,7 +246,7 @@ export function EditorialShowcase() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1700px] px-[14px] sm:px-5 lg:px-8 xl:px-10">
+      <div className="lumina-page-shell relative z-10">
         <div className="grid gap-10 md:gap-8 lg:grid-cols-[0.46fr_0.54fr] lg:items-start lg:gap-10 xl:gap-12 2xl:gap-14">
           <motion.div
             variants={stagger}

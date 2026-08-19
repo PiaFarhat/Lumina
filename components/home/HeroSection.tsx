@@ -37,9 +37,9 @@ export function HeroSection({ onRequest }: { onRequest: (kind: RequestKind) => v
   return (
     <section
       id="home"
-      className="lumina-hero relative overflow-hidden bg-[var(--background)] px-4 pb-12 pt-[calc(var(--lumina-header-safe-offset)+0.25rem)] text-[var(--foreground)] sm:pb-16 sm:pt-[calc(var(--lumina-header-safe-offset)+1.25rem)] lg:pb-18 lg:pt-[calc(var(--lumina-header-safe-offset)+0.75rem)] xl:pb-20"
+      className="lumina-hero relative overflow-hidden bg-[var(--background)] pb-12 pt-[calc(var(--lumina-header-safe-offset)+0.25rem)] text-[var(--foreground)] sm:pb-16 sm:pt-[calc(var(--lumina-header-safe-offset)+1.25rem)] lg:pb-18 lg:pt-[calc(var(--lumina-header-safe-offset)+0.75rem)] xl:pb-20"
     >
-      <div className="mx-auto grid w-full max-w-[min(96vw,var(--lumina-page-max))] items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <div className="lumina-page-shell grid items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-2xl">
           <p className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-strong)]">
             <Sparkles className="h-4 w-4" aria-hidden />

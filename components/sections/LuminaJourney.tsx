@@ -177,7 +177,7 @@ export function LuminaJourney() {
   }
 
   return (
-    <section className="relative overflow-x-hidden overflow-y-hidden bg-[var(--surface-muted)] px-4 pb-14 pt-[calc(var(--lumina-header-safe-offset)+0.75rem)] text-[var(--foreground)] scroll-mt-[var(--lumina-header-safe-offset)] sm:px-5 sm:pb-16 sm:pt-[calc(var(--lumina-header-safe-offset)+1rem)] lg:px-8 lg:pb-18 lg:pt-[calc(var(--lumina-header-safe-offset)+0.75rem)]">
+    <section className="relative overflow-x-hidden overflow-y-hidden bg-[var(--surface-muted)] pb-14 pt-[calc(var(--lumina-header-safe-offset)+0.75rem)] text-[var(--foreground)] scroll-mt-[var(--lumina-header-safe-offset)] sm:pb-16 sm:pt-[calc(var(--lumina-header-safe-offset)+1rem)] lg:pb-18 lg:pt-[calc(var(--lumina-header-safe-offset)+0.75rem)]">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-y-[22%] right-0 hidden w-[42%] rounded-[56px] border border-[#7A92A3]/10 bg-[linear-gradient(145deg,rgba(122,146,163,0.075),rgba(143,168,155,0.035))] lg:block xl:w-[44%]"
@@ -195,7 +195,7 @@ export function LuminaJourney() {
         }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-[min(96vw,var(--lumina-page-max))]">
+      <div className="lumina-page-shell relative z-10">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-[52rem]">
             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[var(--accent)] sm:text-xs">
