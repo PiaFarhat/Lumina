@@ -96,12 +96,12 @@ function RibbonTriangle({
   accentClassName: string;
   mobile?: boolean;
 }) {
+  const wrapperClassName = mobile
+    ? "relative h-full w-full"
+    : `absolute inset-x-0 ${direction === "up" ? "bottom-1/2" : "top-1/2"} h-[7.75rem] lg:h-[9.25rem]`;
+
   return (
-    <div
-      className={`absolute inset-x-0 ${direction === "up" ? "bottom-1/2" : "top-1/2"} ${
-        mobile ? "h-[8.75rem]" : "h-[7.75rem] lg:h-[9.25rem]"
-      }`}
-    >
+    <div className={wrapperClassName}>
       <div
         className="relative h-full w-full bg-[#F4F1EA]/95"
         style={{
@@ -112,7 +112,15 @@ function RibbonTriangle({
         }}
       >
         <div
-          className={`absolute inset-x-0 ${direction === "up" ? "bottom-6 lg:bottom-7" : "top-6 lg:top-7"} flex justify-center`}
+          className={`absolute inset-x-0 ${
+            direction === "up"
+              ? mobile
+                ? "bottom-6"
+                : "bottom-6 lg:bottom-7"
+              : mobile
+                ? "top-6"
+                : "top-6 lg:top-7"
+          } flex justify-center`}
         >
           <Icon
             className={`${accentClassName} ${mobile ? "h-12 w-12" : "h-11 w-11 lg:h-14 lg:w-14"}`}
@@ -192,35 +200,61 @@ function MobileValueSlide({
   reduceMotion: boolean;
 }) {
   const Icon = item.icon;
+  const isEven = index % 2 === 0;
+  const direction = isEven ? "down" : "up";
   const revealDelay = (index % 3) * 0.08;
 
   return (
     <article className="relative mx-auto flex min-h-[26rem] w-full max-w-[26rem] flex-col items-center px-3 text-center">
-      <motion.div
-        initial={reduceMotion ? false : "hidden"}
-        whileInView={reduceMotion ? undefined : "visible"}
-        viewport={{ once: true, amount: 0.5 }}
-        variants={textReveal}
-        custom={revealDelay}
-        className="w-full pt-1"
-      >
-        <h3 className="text-[1.35rem] font-semibold text-[#F4F1EA]">{item.title}</h3>
-        <p className="mx-auto mt-4 max-w-[18rem] text-[0.98rem] leading-7 text-[#F4F1EA]/78">
-          {item.description}
-        </p>
-      </motion.div>
-      <div className="relative mt-8 h-[13rem] w-full max-w-[17.5rem]">
-        <div className="absolute inset-x-0 top-0 h-full">
-          <div
-            className="relative h-full w-full bg-[#F4F1EA]/96"
-            style={{ clipPath: "polygon(0% 0%, 100% 0%, 50% 100%)" }}
-          >
-            <div className="absolute inset-x-0 top-7 flex justify-center">
-              <Icon className={`${item.accentClassName} h-12 w-12`} aria-hidden />
-            </div>
+      {direction === "up" ? (
+        <>
+          <div className="relative h-[13rem] w-full max-w-[17.5rem]">
+            <RibbonTriangle
+              direction="up"
+              Icon={Icon}
+              accentClassName={item.accentClassName}
+              mobile
+            />
           </div>
-        </div>
-      </div>
+          <motion.div
+            initial={reduceMotion ? false : "hidden"}
+            whileInView={reduceMotion ? undefined : "visible"}
+            viewport={{ once: true, amount: 0.5 }}
+            variants={textReveal}
+            custom={revealDelay}
+            className="mt-6 w-full"
+          >
+            <h3 className="text-[1.35rem] font-semibold text-[#F4F1EA]">{item.title}</h3>
+            <p className="mx-auto mt-4 max-w-[18rem] text-[0.98rem] leading-7 text-[#F4F1EA]/78">
+              {item.description}
+            </p>
+          </motion.div>
+        </>
+      ) : (
+        <>
+          <motion.div
+            initial={reduceMotion ? false : "hidden"}
+            whileInView={reduceMotion ? undefined : "visible"}
+            viewport={{ once: true, amount: 0.5 }}
+            variants={textReveal}
+            custom={revealDelay}
+            className="w-full pt-1"
+          >
+            <h3 className="text-[1.35rem] font-semibold text-[#F4F1EA]">{item.title}</h3>
+            <p className="mx-auto mt-4 max-w-[18rem] text-[0.98rem] leading-7 text-[#F4F1EA]/78">
+              {item.description}
+            </p>
+          </motion.div>
+          <div className="relative mt-8 h-[13rem] w-full max-w-[17.5rem]">
+            <RibbonTriangle
+              direction="down"
+              Icon={Icon}
+              accentClassName={item.accentClassName}
+              mobile
+            />
+          </div>
+        </>
+      )}
     </article>
   );
 }

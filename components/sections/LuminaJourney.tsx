@@ -180,6 +180,14 @@ export function LuminaJourney() {
     <section className="relative overflow-x-hidden overflow-y-hidden bg-[var(--surface-muted)] pb-14 pt-[calc(var(--lumina-header-safe-offset)+0.75rem)] text-[var(--foreground)] scroll-mt-[var(--lumina-header-safe-offset)] sm:pb-16 sm:pt-[calc(var(--lumina-header-safe-offset)+1rem)] lg:pb-18 lg:pt-[calc(var(--lumina-header-safe-offset)+0.75rem)]">
       <div
         aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(244,241,234,0.94)_0%,rgba(238,236,229,0.98)_48%,rgba(244,241,234,0.94)_100%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-[6%] top-[18%] h-[22rem] rounded-[3rem] border border-[#D8D4CC]/55 bg-[linear-gradient(145deg,rgba(255,255,255,0.56),rgba(244,241,234,0.18))] opacity-80 blur-3xl sm:inset-x-[10%] sm:top-[20%] md:h-[24rem] lg:hidden"
+      />
+      <div
+        aria-hidden="true"
         className="pointer-events-none absolute inset-y-[22%] right-0 hidden w-[42%] rounded-[56px] border border-[#7A92A3]/10 bg-[linear-gradient(145deg,rgba(122,146,163,0.075),rgba(143,168,155,0.035))] lg:block xl:w-[44%]"
         style={{
           clipPath: "polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 28%)",
